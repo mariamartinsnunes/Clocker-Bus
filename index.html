@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clocker Bus</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="icon" type="image/png" href="./imagens/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-bus"></i>
+            <span>CL<i class="fa-regular fa-clock" style="font-size: 20px;"></i>CKER BUS</span>
+        </div>
+        <nav>
+            <a href="./index.html" class="ativo">Página Inicial</a>
+            <a href="./html/itinerarios.html">Itinerários</a>
+            <a href="./html/historico.html">historico</a>
+            <a href="#">Minha Conta</a>
+        </nav>
+    </header>
+
+    <div class="busca-container">
+        <h2 class="font-oswald">Buscar Rota</h2>
+        <div class="inputs-busca">
+            <input type="text" class="input-pill" placeholder="Adicione sua localização atual">
+            <input type="text" class="input-pill" placeholder="Adicione a localização do seu destino">
+
+        </div>
+        <button class="button-buscar">Buscar</button>
+    </div>
+
+    <main>
+        <div class="coluna">
+            <h3 class="titulo-secao font-oswald">principais Rotas</h3>
+
+            <div class="card-rota">
+                <div class="card-img"></div>
+                <div class="card-info">
+                        <span>Numero da Linha:</span>
+                        <span>Previsão de Saida:</span>
+                        <span>Previsão:</span>
+                        <span>Previsão de Chegada:</span>
+                        <a class="card-link">Mais Informações</a>
+                </div>
+            </div>
+
+            <div class="card-rota">
+                <div class="card-img"></div>
+                <div class="card-info">
+                        <span>Numero da Linha:</span>
+                        <span>Previsão de Saida:</span>
+                        <span>Previsão:</span>
+                        <span>Previsão de Chegada:</span>
+                        <a class="card-link">Mais Informações</a>
+                </div>
+            </div>
+
+            <div class="card-rota">
+                <div class="card-img"></div>
+                <div class="card-info">
+                        <span>Numero da Linha:</span>
+                        <span>Previsão de Saida:</span>
+                        <span>Previsão:</span>
+                        <span>Previsão de Chegada:</span>
+                        <a class="card-link">Mais Informações</a>
+                </div>
+            </div>
+
+            <button class="button-add"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="coluna">
+            <h3 class="titulo-secao font-oswald">Ônibus próximo a você </h3>
+            <div class="mapa-container">
+                <i class="fa-solid fa-location-dot pino-mapa pino-1"></i>
+                <i class="fa-solid fa-location-dot pino-mapa pino-2"></i>
+                <i class="fa-solid fa-location-dot pino-mapa pino-3"></i>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="#">Seja Parceiro e Investidor</a>
+        <a href="#">Entre em Contato</a>
+        <a href="#">Trabalhe Conosco</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Investidores e Parceiros</a>
+    </footer>
+
+</body>
+</html>
