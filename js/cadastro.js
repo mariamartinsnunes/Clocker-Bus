@@ -3,7 +3,7 @@
 
 //cadastro 
 
-let usuariosCdastrados = [];
+let usuariosCadastrados = [];
 
 const nome = document.querySelector('#nome');
 const email = document.querySelector('#email'); 
@@ -50,55 +50,57 @@ function validacoes(){
 
 
 function cadastroUsuario(){
-    usuariosCdastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+    usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const usuario = {
-        nome: nome.value,
-        email: email.value,
-        senha: senha.value
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        senha: senha.value.trim()
     };
 
-    usuariosCdastrados.push(usuario);
-    localStorage.setItem("usuarios", JSON.stringify(usuariosCdastrados));
+    usuariosCadastrados.push(usuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
 }
 
 
 
 const formulario = document.querySelector('#formulario');
 
-formulario.addEventListener('submit', function(e){
-    e.preventDefault();
+if(formulario){
+    formulario.addEventListener('submit', function(e){
+        e.preventDefault();
 
-    if(validacoes()){
-        usuariosCdastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+        if(validacoes()){
+            usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-        let emailExiste = false;
-        usuariosCdastrados.forEach(function(usuario){
-            if(email.value == usuario.email){
-                emailExiste = true;
-            }
-        });
+            let emailExiste = false;
+            usuariosCadastrados.forEach(function(usuario){
+                if(email.value == usuario.email){
+                    emailExiste = true;
+                }
+            });
 
-    
-        if(emailExiste){
-            alert('Não foi possível realizar o cadastro, pois este email já está cadastrado!');
-
-            nome.value = '';
-            email.value = '';
-            senha.value = ''; 
         
-        } else {   
-            cadastroUsuario();
-            alert('Cadastro realizado com sucesso!');
+            if(emailExiste){
+                alert('Não foi possível realizar o cadastro, pois este email já está cadastrado!');
 
-            nome.value = '';
-            email.value = '';
-            senha.value = '';
+                nome.value = '';
+                email.value = '';
+                senha.value = ''; 
+            
+            } else {   
+                cadastroUsuario();
+                alert('Cadastro realizado com sucesso!');
 
-            window.location.replace("../index.html");
+                nome.value = '';
+                email.value = '';
+                senha.value = '';
+
+                window.location.replace("../index.html");
+            }
         }
-    }
-});
+    });
+}
 
 
 // ------------------------------------------------------------------------------
@@ -126,36 +128,38 @@ function validacaoLogin(){
 
 const formLogin = document.querySelector('#formLogin');
 
-formLogin.addEventListener('submit', function(e){
-    e.preventDefault();
+if(formLogin){
+    formLogin.addEventListener('submit', function(e){
+        e.preventDefault();
 
-    if(validacaoLogin()){
-        usuariosCdastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
-        
-        let cadastroExiste = false;
-        let usuarioLogado = null;
+        if(validacaoLogin()){
+            let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+            
+            let cadastroExiste = false;
+            let usuarioLogado = null;
 
-        for(let i = 0; i < usuariosCdastrados.length; i++){
-            let usuario = usuariosCdastrados[i];
+            for(let i = 0; i < usuariosCadastrados.length; i++){
+                let usuario = usuariosCadastrados[i];
 
-            if(emailLogin.value.trim() == usuario.email.trim() && senhaLogin.value.trim() == usuario.senha.trim()){
-                cadastroExiste = true;
-                usuarioLogado = usuario;
-                break;
+                if(emailLogin.value.trim() == usuario.email.trim() && senhaLogin.value.trim() == usuario.senha.trim()){
+                    cadastroExiste = true;
+                    usuarioLogado = usuario;
+                    break;
+                }
+            }
+
+            
+            if(cadastroExiste){
+                alert('Entrando...');
+                localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+                window.location.replace("../index.html");
+            
+            } else {
+                alert('Usuário não registrado');
+
+                emailLogin.value = '';
+                senhaLogin.value = '';
             }
         }
-
-        
-        if(cadastroExiste){
-            alert('Entrando...');
-            localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-            window.location.replace("../index.html");
-        
-        } else {
-            alert('Usuário não registrado');
-
-            emailLogin.value = '';
-            senhaLogin.value = '';
-        }
-    }
-});
+    });
+}
