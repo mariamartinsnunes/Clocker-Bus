@@ -72,7 +72,7 @@
             <a href="../index.html">Página Inicial</a>
             <a href="./itinerarios.html">Itinerários</a>
             <a href="./historico.html" class="ativo">Historicos</a>
-            <a href="#">Minha Conta</a>
+            <a href="#" id="btnMinhaConta">Minha Conta</a>
         </nav>
     </header>
         <div class="busca-historico">
@@ -141,5 +141,61 @@
         <a href="#">Investidores e Parceiro</a>
     </footer>
     
+
+
+    <!--Minha Conta-->
+
+    <!-- OVERLAY -->
+    <div id="overlay"></div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebarConta" class="sidebar-conta">
+        <div class="sidebar-header">
+            <h2>Minha Conta</h2>
+            <button id="fecharSidebar">&times;</button>
+        </div>
+
+        <div class="sidebar-content">
+            <div class="perfil">
+                <div class="foto-perfil"></div>
+                <h3>Nome do Usuário</h3>
+                <p>usuario@email.com</p>
+            </div>
+
+            <ul class="menu-conta">
+                <li><a href="#">Editar Perfil</a></li>
+                <li><a href="#">Meus Favoritos</a></li>
+                <li><a href="#">Configurações</a></li>
+                <li><a href="#">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+
+            var btn = document.getElementById("btnMinhaConta");
+            var sidebar = document.getElementById("sidebarConta");
+            var overlay = document.getElementById("overlay");
+            var fechar = document.getElementById("fecharSidebar");
+
+            btn.onclick = function(e){
+                e.preventDefault();
+                sidebar.style.right = "0";
+                overlay.style.display = "block";
+            }
+
+            fechar.onclick = function(){
+                sidebar.style.right = "-350px";
+                overlay.style.display = "none";
+            }
+
+            overlay.onclick = function(){
+                sidebar.style.right = "-350px";
+                overlay.style.display = "none";
+            }
+
+        }
+    </script>
 </body>
 </html>

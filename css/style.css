@@ -237,3 +237,130 @@ footer a {
     font-size: 12px;
     text-transform: uppercase;
 }
+
+/* ===== SIDEBAR ===== */
+
+/* ===== SIDEBAR MODERNA ===== */
+
+.sidebar-conta {
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 360px;
+    height: 100vh;
+    background: linear-gradient(180deg, #F1FEC6, #B6D6CC);
+    box-shadow: -8px 0 25px rgba(0,0,0,0.25);
+    transition: 0.4s ease;
+    z-index: 1001;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #04191F;
+}
+
+.sidebar-header button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #04191F;
+}
+
+.sidebar-content {
+    flex: 1;
+}
+
+/* PERFIL */
+
+.perfil {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.foto-perfil {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: #64B6AC;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.perfil h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.perfil p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* MENU */
+
+.menu-conta {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-conta li {
+    margin-bottom: 15px;
+}
+
+.menu-conta a {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #04191F;
+    background: rgba(255,255,255,0.5);
+    transition: 0.3s;
+}
+
+.menu-conta a:hover {
+    background: #34A0A4;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* OVERLAY MAIS SUAVE */
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(4, 25, 31, 0.5);
+    display: none;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 1000;
+}
