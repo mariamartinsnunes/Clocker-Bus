@@ -24,7 +24,7 @@
         <nav>
             <a href="./index.html" class="ativo">Página Inicial</a>
             <a href="./html/itinerarios.html">Itinerários</a>
-            <a href="./html/historico.html">historico</a>
+            <a href="./html/historico.html">Histórico</a>
             <a href="#" id="btnMinhaConta">Minha Conta</a>
         </nav>
     </header>
@@ -113,15 +113,17 @@
         <div class="sidebar-content">
             <div class="perfil">
                 <div class="foto-perfil"></div>
-                <h3>Nome do Usuário</h3>
-                <p>usuario@email.com</p>
+                <h3 id="nomeUsuario"></h3>
+                <p id="emailUsuario"></p>
             </div>
 
             <ul class="menu-conta">
-                <li><a href="#">Editar Perfil</a></li>
-                <li><a href="#">Meus Favoritos</a></li>
-                <li><a href="#">Configurações</a></li>
-                <li><a href="#">Sair</a></li>
+                <li><a href="#" id="realizarCadastro">Cadastre-se ou faça seu login</a></li>
+
+                <li><a href="#" class="opcaoPerfil">Editar Perfil</a></li>
+                <li><a href="#" class="opcaoPerfil">Meus Favoritos</a></li>
+                <li><a href="#" class="opcaoPerfil">Configurações</a></li>
+                <li><a href="#" class="opcaoPerfil" id="sairLogin">Sair</a></li>
             </ul>
         </div>
     </div>
@@ -153,5 +155,6 @@
         }
     </script>
 
+    <script src="./js/conta.js"></script>
 </body>
 </html>

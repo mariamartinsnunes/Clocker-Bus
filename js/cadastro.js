@@ -4,6 +4,7 @@
 //cadastro 
 
 let usuariosCadastrados = [];
+let usuarioLogado;
 
 const nome = document.querySelector('#nome');
 const email = document.querySelector('#email'); 
@@ -60,6 +61,8 @@ function cadastroUsuario(){
 
     usuariosCadastrados.push(usuario);
     localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
+
+    localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
 }
 
 
@@ -88,7 +91,7 @@ if(formulario){
                 email.value = '';
                 senha.value = ''; 
             
-            } else {   
+            } else {                   
                 cadastroUsuario();
                 alert('Cadastro realizado com sucesso!');
 
@@ -136,7 +139,7 @@ if(formLogin){
             let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
             
             let cadastroExiste = false;
-            let usuarioLogado = null;
+            usuarioLogado = null;
 
             for(let i = 0; i < usuariosCadastrados.length; i++){
                 let usuario = usuariosCadastrados[i];
