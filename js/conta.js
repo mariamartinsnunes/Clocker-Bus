@@ -1,37 +1,67 @@
 //melhorar os feedbacks depois (todos os alerts)
 
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+
+//lista de avatares disponíveis
+
+const avatares = [
+    '/imagens/avatares/avatar0.png',
+    '/imagens/avatares/avatar1.png',
+    '/imagens/avatares/avatar2.png',
+    '/imagens/avatares/avatar3.png',
+    '/imagens/avatares/avatar4.png',
+    '/imagens/avatares/avatar5.png',
+    '/imagens/avatares/avatar6.png',
+    '/imagens/avatares/avatar7.png',
+    '/imagens/avatares/avatar8.png',
+    '/imagens/avatares/avatar9.png',
+    '/imagens/avatares/avatar10.png',
+];
+
+let indexAvatar = 0;
+
 
 //adicionado as informações do usuário logado na página
 
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-console.log(usuarioLogado);
-
-
 function exibeInformacoes(){
+    const exibirAvatar = document.querySelector('#exibirAvatar');
+
     const nomeUsuario = document.querySelector('#nomeUsuario');
     const emailUsuario = document.querySelector('#emailUsuario');
 
     let emailPerfil;
 
-    if(nomeUsuario && emailUsuario){
+    if(exibirAvatar && nomeUsuario && emailUsuario){
         if(usuarioLogado){
+
+            if(usuarioLogado?.avatar){
+                indexAvatar = avatares.indexOf(usuarioLogado.avatar);
+
+                if(indexAvatar === -1){
+                    indexAvatar = 0;
+                }
+
+                exibirAvatar.src = usuarioLogado.avatar;
+            }   
+
             nomeUsuario.textContent = usuarioLogado.nome;
             emailUsuario.textContent = usuarioLogado.email;
 
             emailPerfil = usuarioLogado.email;
 
         } else {
+            exibirAvatar.src = avatares[0];
+
             nomeUsuario.textContent = 'nome';
             emailUsuario.textContent = 'email';
         }
     }
 }
 
-exibeInformacoes();
 
 
-
-// caso o usuário não tenha cadastro, ele deve ter a opção de se cadastrar 
+//caso o usuário não tenha cadastro, ele deve ter a opção de se cadastrar 
 
 const opcaoCadastro = document.querySelector('#realizarCadastro');
 const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
@@ -55,8 +85,9 @@ if(usuarioLogado){
 
 
 
-// para editar as informações do perfil
+//para editar as informações do perfil
 
+//abre o modal de edição
 const editarPerfil = document.querySelector('#editarPerfil');
 const modalPerfil = document.querySelector('.modalPerfil');
 
@@ -70,7 +101,54 @@ if(editarPerfil && modalPerfil){
 }
 
 
+//adicionar ou atualizar o avatar do usuário
+const editarAvatar = document.querySelector('#editarAvatar');
 
+const setaEsquerda = document.querySelector('#esquerda');
+const setaDireita = document.querySelector('#direita');
+
+
+function controlarSetas(){
+    if(setaEsquerda && setaDireita){
+        setaEsquerda.style.display = indexAvatar === 0 ? 'none' : 'block';
+        setaDireita.style.display = indexAvatar === avatares.length - 1 ? 'none' : 'block';
+    }
+}
+
+
+if(setaEsquerda && setaDireita){
+    setaEsquerda.addEventListener('click', () => {
+        if(indexAvatar > 0){
+            indexAvatar--;
+            atualizaAvatar();
+        }
+    });
+
+    setaDireita.addEventListener('click', () => {
+        if(indexAvatar < avatares.length - 1){
+            indexAvatar++;
+            atualizaAvatar();
+        }
+    });
+}
+
+
+function atualizaAvatar(){
+    if(!avatares[indexAvatar]){
+        indexAvatar = 0;
+    }
+
+    if(editarAvatar){
+        editarAvatar.src = avatares[indexAvatar];
+        controlarSetas();
+    }
+}
+
+exibeInformacoes();
+atualizaAvatar();
+
+
+//atualiza as informações (nome e/ou senha)
 const nomePerfil = document.querySelector('#nomePerfil');
 const senhaAtual = document.querySelector('#senhaAtual');
 const novaSenha = document.querySelector('#senhaNova');
@@ -114,6 +192,7 @@ function validacoes(){
 }
 
 
+//salva as alterações
 const salvar = document.querySelector('.botaoSalvar');
 
 if(salvar){
@@ -133,6 +212,9 @@ if(salvar){
                 usuariosCadastrados[index].senha = senhaNova;
             }
 
+            usuarioLogado.avatar = avatares[indexAvatar];
+            usuariosCadastrados[index].avatar = avatares[indexAvatar];
+
             localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
             localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
 
@@ -148,9 +230,7 @@ if(salvar){
 }
 
 
-
-// saindo da conta
-
+//saindo da conta
 const sair = document.querySelector('#sairLogin');
 
 if(sair){

@@ -56,7 +56,8 @@ function cadastroUsuario(){
     const usuario = {
         nome: nome.value.trim(),
         email: email.value.trim(),
-        senha: senha.value.trim()
+        senha: senha.value.trim(),
+        avatar: '/imagens/avatares/avatar0.png'
     };
 
     usuariosCadastrados.push(usuario);
@@ -158,7 +159,7 @@ if(formLogin){
                 window.location.replace("../index.html");
             
             } else {
-                alert('Usuário não registrado');
+                alert('Usuário e/ou senha incorreto(s)');
 
                 emailLogin.value = '';
                 senhaLogin.value = '';
