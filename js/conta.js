@@ -62,9 +62,13 @@ function exibeInformacoes(){
 
 
 //caso o usuário não tenha cadastro, ele deve ter a opção de se cadastrar 
-
 const opcaoCadastro = document.querySelector('#realizarCadastro');
 const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
+
+//se o usuário não estiver cadastrado, ele não terá acesso as funções histórico e itinerário
+const abaItinerario = document.querySelector('#abaItinerario');
+const abaHistorico = document.querySelector('#abaHistorico');
+
 
 if(usuarioLogado){
     if(opcaoCadastro){
@@ -79,6 +83,20 @@ if(usuarioLogado){
     if(opcaoCadastro){
         opcaoCadastro.addEventListener('click', () => {
             window.location.replace('../html/cadastro.html');
+        });
+    }
+
+    if(abaItinerario && abaHistorico){
+        abaItinerario.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Cadastre-se ou faça seu login para acessar a aba Itinerários!');
+            window.location.replace('/index.html');
+        });
+
+        abaHistorico.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Cadastre-se ou faça seu login para acessar a aba Histórico!');
+            window.location.replace('/index.html');
         });
     }
 }
