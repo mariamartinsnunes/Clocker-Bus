@@ -92,11 +92,11 @@ const editarPerfil = document.querySelector('#editarPerfil');
 const modalPerfil = document.querySelector('.modalPerfil');
 
 if(editarPerfil && modalPerfil){
-    const modal = new bootstrap.Modal(modalPerfil);
+    const modalP = new bootstrap.Modal(modalPerfil);
 
     editarPerfil.addEventListener('click', (e) => {
         e.preventDefault();
-        modal.show();
+        modalP.show();
     });
 }
 
@@ -193,7 +193,7 @@ function validacoes(){
 
 
 //salva as alterações
-const salvar = document.querySelector('.botaoSalvar');
+const salvar = document.querySelector('#salvarPerfil');
 
 if(salvar){
     salvar.addEventListener('click', (e) => {

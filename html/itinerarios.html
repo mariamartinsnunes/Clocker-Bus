@@ -16,6 +16,7 @@
 
     <link rel="icon" type="image/png" href="../imagens/favicon.png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleItinerarios.css">
 
     <style>
         main{
@@ -37,7 +38,7 @@
         .tabelas th{
             background-color: #34A0A4;
             border-radius: 5px;
-            border: 2px solid #B6D6CC;
+            border: 3px solid #B6D6CC;
 
             color: #04191F;
             font-family: 'Cambria';
@@ -85,10 +86,10 @@
                         <th>Pontos de Parada</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="manha"></tbody>
             </table>
 
-            <button class="button-add"><i class="fa-solid fa-plus"></i></button>
+            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
         </div>
 
 
@@ -106,10 +107,10 @@
                         <th>Pontos de Parada</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="tarde"></tbody>
             </table>
 
-            <button class="button-add"><i class="fa-solid fa-plus"></i></button>
+            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
         </div>
 
 
@@ -127,12 +128,45 @@
                         <th>Pontos de Parada</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="noite"></tbody>
             </table>
 
-            <button class="button-add"><i class="fa-solid fa-plus"></i></button>
+            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
         </div>
     </main>
+
+    
+    <!-- MODAL PARA ADICIONAR AS INFORMAÇÕES DO ITINERÁRIO -->
+
+    <div class="modal fade" id="modalItinerario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formItinerarios">
+                        <h5>Adicionar Novo Itinerário</h5>
+
+                        <label for="endSaida">Endereço de saída:</label> <br>
+                        <input type="text" id="endSaida" placeholder="digite aqui"> <br><br>
+                        
+                        <label for="endChegada">Endereço do destino:</label> <br>
+                        <input type="text" id="endChegada" placeholder="digite aqui">
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="botao botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="botao botaoSalvar" id="salvarItinerario" data-bs-dismiss="modal">Salvar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
     <footer>
@@ -227,7 +261,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="botao botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="botao botaoSalvar" data-bs-dismiss="modal">Salvar</button>
+                    <button type="button" class="botao botaoSalvar" id="salvarPerfil" data-bs-dismiss="modal">Salvar</button>
                 </div>
             </div>
 
@@ -263,6 +297,7 @@
     </script>
     
     <script src="../js/conta.js"></script>
+    <script src="../js/itinerarios.js"></script>
 
 </body>
 </html>

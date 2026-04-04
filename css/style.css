@@ -238,6 +238,7 @@ footer a {
     text-transform: uppercase;
 }
 
+
 /* ===== SIDEBAR ===== */
 
 /* ===== SIDEBAR MODERNA ===== */
@@ -378,7 +379,7 @@ footer a {
 
 /* MODAL EDITAR PERFIL */
 
-.modalPerfil .modal-content{
+.modal-content{
     background: linear-gradient(#f5ffd6, #cee3dc);
 }
 

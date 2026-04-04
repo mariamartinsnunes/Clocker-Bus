@@ -57,7 +57,8 @@ function cadastroUsuario(){
         nome: nome.value.trim(),
         email: email.value.trim(),
         senha: senha.value.trim(),
-        avatar: '/imagens/avatares/avatar0.png'
+        avatar: '/imagens/avatares/avatar0.png',
+        itinerariosSalvos: []
     };
 
     usuariosCadastrados.push(usuario);
