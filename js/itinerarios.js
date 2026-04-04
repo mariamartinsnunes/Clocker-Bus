@@ -115,7 +115,6 @@ const itinerariosValidos = [
 //com a implementação da API, podemos usar endereços reais (eu acho)
 
 
-
 //indice de cada tabela
 const indexManha = 0;
 const indexTarde = 1;
@@ -185,6 +184,7 @@ function addLinha(tabela, itinerario){
         <td>${itinerario.chegada}</td>
         <td>${itinerario.destino}</td>
         <td><button class='buscarPontos' data-itinerario-id='${itinerario.id}'>Buscar</button></td>
+        <td><button class='excluirItinerario' data-itinerario-id='${itinerario.id}'>Exluir</button></td>
     `;
 
     tabela.appendChild(linha);
@@ -228,7 +228,11 @@ if(addItinerario.length > 0){
 function exibeItinerarios(){
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-    if(usuarioLogado){
+    if(usuarioLogado){        
+        tabelaManha.innerHTML = '';
+        tabelaTarde.innerHTML = '';
+        tabelaNoite.innerHTML = '';
+
         let salvos = usuarioLogado.itinerariosSalvos;
 
         salvos.forEach(id => {
@@ -342,3 +346,40 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+
+//o usuário também deve ter a opção de excluir o itinerário
+document.addEventListener('click', (event) => {
+    if(event.target.classList.contains('excluirItinerario')){
+        event.preventDefault();
+
+        const botaoExcluir = event.target;
+        const id = Number(botaoExcluir.dataset.itinerarioId);
+        
+        let itinerario = itinerariosValidos.find(i => i.id == id);
+
+        if(itinerario){
+            const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {itinerariosSalvos: []};
+
+            let index = usuariosCadastrados.findIndex(usuario => usuario.email === usuarioLogado.email);
+
+            if(index === -1) return;
+
+            if(usuarioLogado.itinerariosSalvos.includes(itinerario.id)){
+
+                usuarioLogado.itinerariosSalvos = usuarioLogado.itinerariosSalvos.filter(i => i !== itinerario.id);
+                usuariosCadastrados[index].itinerariosSalvos = usuariosCadastrados[index].itinerariosSalvos.filter(i => i !== itinerario.id);
+                
+                localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
+                localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+
+                alert('Itinerário excluido com sucesso!');
+                exibeItinerarios();
+            }
+        }
+    }
+});
+
+//assim que o usuário clica no botão de excluir, o itinerário é excluido
+//o ideal é que antes apareça uma mensagem de confirmação, perguntando se ele realmente deseja excluir o itinerário

@@ -51,6 +51,22 @@
     background-color: #236e70;
 }
 
+.excluirItinerario{
+    background-color: #f86653;
+    border: none;
+    border-radius: 15px;
+
+    font-size: 16px;
+    color: white;
+    width: 80px;
+    height: 30px;
+}
+
+.excluirItinerario:hover{
+    background-color: #A31300;
+    color: white;
+}
+
 #pontosParada .modal-content{
     background-color: #f1fec6d4;
     border: 2px solid #F1FEC6;

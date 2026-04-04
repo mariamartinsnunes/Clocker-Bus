@@ -1,0 +1,24 @@
+#container-historico{
+    display: flex;
+    flex-direction: row;
+}
+
+#container-historico section{
+    width: 50%;
+}
+
+.subtitulo{
+    margin: 30px;
+    padding: 10px 15px;
+
+    font-family: 'Oswald', sans-serif;
+    background-color: #34A0A4;
+    border-radius: 20px;
+}
+
+.container-conteudo{
+    margin: 0 30px;
+    width: 90%;
+
+    border: 1px solid black;
+}

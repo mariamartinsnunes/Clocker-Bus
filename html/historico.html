@@ -16,6 +16,7 @@
 
     <link rel="icon" type="image/png" href="../imagens/favicon.png">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleHistorico.css">
 
     <style>
         .busca-historico {
@@ -78,63 +79,20 @@
             <a href="#" id="btnMinhaConta">Minha Conta</a>
         </nav>
     </header>
-        <div class="busca-historico">
-            <div class="input-wrapper">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="input-historico" placeholder="busque o destino desejado ...">
-            </div>
-            <button class="button-buscar-historico">Buscar</button>
-        </div>
+        
+    <main id="container-historico">
+        <section>
+            <h4 class="subtitulo">Linhas visualizadas recentemente</h4>
 
-        <main> 
-            <div class="coluna">
-                <h3 class="titulo-secao font-oswald">Principais rotas</h3>
+            <div class="container-conteudo"></div>
+        </section>
 
-                <div class="card-rota">
-                    <div class="card-img"></div>
-                    <div class="card-info">
-                        <span>Número da linha:</span>
-                    <span>Previsão de saída:</span>
-                    <span>Previsão:</span>
-                    <span>Previsão de chegada:</span>
-                    <a class="card-link">Mais Informações</a>
-                    </div>
-                </div>
+        <section>
+            <h4 class="subtitulo">Linhas salvas</h4>
 
-                <div class="card-rota">
-                    <div class="card-img"></div>
-                    <div class="card-info">
-                        <span>Número da linha:</span>
-                        <span>Previsão de saída:</span>
-                        <span>Previsão:</span>
-                        <span>Previsão de chegada:</span>
-                        <a class="card-link">Mais Informações</a>
-                    </div>
-                </div>
-
-                <div class="card-rota">
-                    <div class="card-img"></div>
-                    <div class="card-info">
-                        <span>Número da linha:</span>
-                        <span>Previsão de saída:</span>
-                        <span>Previsão:</span>
-                        <span>Previsão de chegada:</span>
-                        <a class="card-link">Mais Informações</a>
-                    </div>
-                </div>
-
-                <button class="button-add"><i class="fa-solid fa-plus"></i></button>
-            </div>
-
-            <div class="coluna">
-                <h3 class="titulo-secao font-oswald">Ônibus próximo a você...</h3>
-                <div class="mapa-container">
-                    <i class="fa-solid fa-location-dot pino-mapa pino-1"></i>
-                    <i class="fa-solid fa-location-dot pino-mapa pino-2"></i>
-                    <i class="fa-solid fa-location-dot pino-mapa pino-3"></i>
-                </div>
-            </div>  
-        </main>
+            <div class="container-conteudo"></div>
+        </section>
+    </main>
 
     <footer>
         <a href="#">Seja Parceiro e Investidor</a>
