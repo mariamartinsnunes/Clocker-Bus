@@ -166,7 +166,7 @@ function periodo(horario, tabelaAtual){
 function addLinha(tabela, itinerario){
     const linhas = tabela.querySelectorAll('tr.linha');
 
-    for(const l of linhas){
+    for(const linha of linhas){
         if(linha.children[0].textContent === itinerario.origem && 
            linha.children[1].textContent === itinerario.saida &&
            linha.children[2].textContent === itinerario.chegada &&
@@ -184,7 +184,7 @@ function addLinha(tabela, itinerario){
         <td>${itinerario.saida}</td>
         <td>${itinerario.chegada}</td>
         <td>${itinerario.destino}</td>
-        <td><button class='buscarPontos'>Buscar</button></td>
+        <td><button class='buscarPontos' data-itinerario-id='${itinerario.id}'>Buscar</button></td>
     `;
 
     tabela.appendChild(linha);
@@ -300,3 +300,45 @@ if(salvarItinerario){
         document.querySelector('#formItinerarios').reset();
     });
 }
+
+
+//com o itinerário salvo, o usuário tem a opção de buscar os pontos de parada
+function exibePontos(paradas){
+    if(pontosParada){
+        const listaPontos = document.querySelector('#listaPontos');
+        listaPontos.innerHTML = '';
+
+        if(paradas.length > 0){
+            paradas.forEach(p => {
+                const li = document.createElement('li');
+                li.innerHTML = p;
+
+                listaPontos.appendChild(li);
+            });
+        
+        } else {
+            listaPontos.innerHTML = 'Não há pontos de parada nesse itinerário';
+        }
+    }
+}
+
+
+const pontosParada = document.querySelector('#pontosParada');
+
+document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('buscarPontos')){
+        e.preventDefault();
+
+        const botaoBusca = e.target;
+        const idItinerario = Number(botaoBusca.dataset.itinerarioId);
+        
+        let itinerario = itinerariosValidos.find(i => i.id == idItinerario);
+        
+        if(itinerario){
+            exibePontos(itinerario.paradas);
+
+            const modalP = new bootstrap.Modal(pontosParada);
+            modalP.show();
+        }
+    }
+});

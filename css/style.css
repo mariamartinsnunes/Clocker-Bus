@@ -153,10 +153,11 @@ main {
     background-color: var(--cor-fundo-pontual);
     display: flex;
     padding: 10px;
+    margin: 15px;
     gap: 15px;
     align-items: center;
     position: relative;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 .card-img {
@@ -418,8 +419,6 @@ footer a {
 .seta:hover{
     transform: scale(1.2);
 }
-
-
 
 .conteudoCampos{
     width: 80%;
