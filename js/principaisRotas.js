@@ -65,13 +65,15 @@ function carregarRotas() {
 }
 
 
+
 //--------------------------------------------------------------------------
 
 //tive que adicionar algumas funções para que o histórico possa funcionar - Malu
 //também adicionei mais informações nas linhas/rotas 
 
+
 //essa exibe as informações da linha
-function exibeInformacoes(linha){
+function exibeInformacoesLinha(linha){
 
     if(informacoesLinha){
         const conteudoLinha = document.querySelector('#conteudoLinha');
@@ -100,28 +102,27 @@ function exibeInformacoes(linha){
 }
 
 
-//quando o usuário clica no "Mais Informações" do card da linha, a função exibeInformacoes() é chamada
+//quando o usuário clica no "Mais Informações" do card da linha, a função exibeInformacoesLinha() é chamada
+
 //na lista de histórico do usuário é salvo o id da linha que o usuário acessou - no index 0 é sempre a última linha visualizada
 
 function atualizaHistorico(idRota){
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
     const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
 
-    if(usuario){
-        let index = usuariosCadastrados.findIndex(usuario => usuario.email === usuario.email);
+    if(usuarioLogado){
+        let index = usuariosCadastrados.findIndex(u => u.email === usuarioLogado.email);
 
-        if(index === -1) return;
-
-        if(usuario.historicoLinhas.includes(idRota)){
-            usuario.historicoLinhas = usuario.historicoLinhas.filter(id => id !== idRota);
+        if(usuarioLogado.historicoLinhas.includes(idRota)){
+            usuarioLogado.historicoLinhas = usuarioLogado.historicoLinhas.filter(id => id !== idRota);
             usuariosCadastrados[index].historicoLinhas = usuariosCadastrados[index].historicoLinhas.filter(i => i !== idRota);
         }
 
-        usuario.historicoLinhas.unshift(idRota);
+        usuarioLogado.historicoLinhas.unshift(idRota);
         usuariosCadastrados[index].historicoLinhas.unshift(idRota);
         
         localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
     }
 }
 
@@ -135,12 +136,12 @@ document.addEventListener('click', (e) => {
         const info = e.target;
         const idRota = Number(info.dataset.rotaId);
 
-        const rotasSalva = JSON.parse(localStorage.getItem('rotasClockerBus'));
+        const rotaSalva = JSON.parse(localStorage.getItem('rotasClockerBus'));
         
-        let linha = rotasSalva.find(r => r.id == idRota);
+        let linha = rotaSalva.find(r => r.id == idRota);
         
         if(linha){
-            exibeInformacoes(linha);
+            exibeInformacoesLinha(linha);
 
             const modalLinha = new bootstrap.Modal(informacoesLinha);
             modalLinha.show();
@@ -152,6 +153,7 @@ document.addEventListener('click', (e) => {
 
 
 //--------------------------------------------------------------------------
+
 
 
 if (btnAdicionar) {

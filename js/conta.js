@@ -2,7 +2,6 @@
 
 
 //lista de avatares disponíveis
-
 const avatares = [
     '/imagens/avatares/avatar0.png',
     '/imagens/avatares/avatar1.png',
@@ -17,13 +16,14 @@ const avatares = [
     '/imagens/avatares/avatar10.png',
 ];
 
-//o ideal não é usar variável global - mudar isso depois
+//o ideal não é usar variável global - vou mudar isso depois
+//deixei assim pq não estava funcionando como deveria sem essa variável
 let indexAvatar = 0;
 
 
-//adicionado as informações do usuário logado na página
 
-function exibeInformacoes(){
+//adicionado as informações do usuário logado na página
+function exibeDados(){
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
     const exibirAvatar = document.querySelector('#exibirAvatar');
 
@@ -56,7 +56,6 @@ function exibeInformacoes(){
 }
 
 
-
 //caso o usuário não tenha cadastro, ele deve ter a opção de se cadastrar 
 const opcaoCadastro = document.querySelector('#realizarCadastro');
 const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
@@ -64,6 +63,7 @@ const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
 //se o usuário não estiver cadastrado, ele não terá acesso as funções histórico e itinerário
 const abaItinerario = document.querySelector('#abaItinerario');
 const abaHistorico = document.querySelector('#abaHistorico');
+
 
 const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
@@ -99,7 +99,6 @@ if(usuario){
 }
 
 
-
 //para editar as informações do perfil
 
 //abre o modal de edição
@@ -128,6 +127,7 @@ function controlarSetas(){
         direita.style.display = indexAvatar === avatares.length - 1 ? 'none' : 'block';
     }
 }
+
 
 const setaEsquerda = document.querySelector('#esquerda');
 const setaDireita = document.querySelector('#direita');
@@ -160,12 +160,12 @@ function atualizaAvatar(){
     }
 }
 
-exibeInformacoes();
+exibeDados();
 atualizaAvatar();
 
 
-//atualiza as informações (nome e/ou senha)
 
+//atualiza as informações (nome e/ou senha)
 function validacoes(nomePerfil, senhaAtual, novaSenha){
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
@@ -243,7 +243,7 @@ if(salvar){
 
             alert('Atualização realizada com sucesso!');
 
-            exibeInformacoes();
+            exibeDados();
         }
                 
         nomePerfil.value = '';

@@ -1,5 +1,5 @@
 //essa função é a mesma que tem em principaisRotas.js - exibe as informações da linha
-function exibeInformacoes(linha){
+function exibeInformacoesLinha(linha){
     if(informacoesLinha){
         const conteudoLinha = document.querySelector('#conteudoLinha');
         conteudoLinha.innerHTML = '';
@@ -28,19 +28,20 @@ function exibeInformacoes(linha){
 
 
 //e quando o usuário clica no 'Mais Informações' de uma linha, a função é chamada e o modal é aberto
+const rotasSalvas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
 const informacoesLinha = document.querySelector('#informacoesLinha');
 
-document.addEventListener('click', (e) => {
-    if(e.target.classList.contains('informacoes')){
-        e.preventDefault();
+document.addEventListener('click', (event) => {
+    if(event.target.classList.contains('informacoes')){
+        event.preventDefault();
 
-        const info = e.target;
+        const info = event.target;
         const idRota = Number(info.dataset.rotaId);
 
         let linha = rotasSalvas.find(r => r.id == idRota);
         
         if(linha){
-            exibeInformacoes(linha);
+            exibeInformacoesLinha(linha);
 
             const modalLinha = new bootstrap.Modal(informacoesLinha);
             modalLinha.show();
@@ -50,12 +51,11 @@ document.addEventListener('click', (e) => {
 
 
 //o histórico do usuário logado é puxado e os cards das linhas são criados e exibidos
-const rotasSalvas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
 const historico = document.querySelector('#historico');
 
 function exibeHistorico(){
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
-    const listaLinhas = usuario.historicoLinhas || [];
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
+    const listaLinhas = usuarioLogado.historicoLinhas || [];
 
     if(!historico){
         return;
