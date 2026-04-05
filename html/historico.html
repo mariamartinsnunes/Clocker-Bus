@@ -84,15 +84,31 @@
         <section>
             <h4 class="subtitulo">Linhas visualizadas recentemente</h4>
 
-            <div class="container-conteudo"></div>
+            <div class="container-conteudo" id="historico"></div>
         </section>
 
         <section>
             <h4 class="subtitulo">Linhas salvas</h4>
 
-            <div class="container-conteudo"></div>
+            <div class="container-conteudo" id="favoritas"></div>
         </section>
+
+        
+        <div class="modal fade" id="informacoesLinha" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Informações sobre a linha</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="conteudoLinha">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
 
     <footer>
         <a href="#">Seja Parceiro e Investidor</a>
@@ -222,6 +238,7 @@
     </script>
 
     <script src="../js/conta.js"></script>
+    <script src="../js/historico.js"></script>
 
 </body>
 </html>

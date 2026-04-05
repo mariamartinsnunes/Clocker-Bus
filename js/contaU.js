@@ -1,8 +1,6 @@
 //melhorar os feedbacks depois (todos os alerts)
 
-
 //lista de avatares disponíveis
-
 const avatares = [
     '/imagens/avatares/avatar0.png',
     '/imagens/avatares/avatar1.png',
@@ -17,7 +15,6 @@ const avatares = [
     '/imagens/avatares/avatar10.png',
 ];
 
-//o ideal não é usar variável global - mudar isso depois
 let indexAvatar = 0;
 
 
@@ -58,98 +55,104 @@ function exibeInformacoes(){
 
 
 //caso o usuário não tenha cadastro, ele deve ter a opção de se cadastrar 
-const opcaoCadastro = document.querySelector('#realizarCadastro');
-const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
-
 //se o usuário não estiver cadastrado, ele não terá acesso as funções histórico e itinerário
-const abaItinerario = document.querySelector('#abaItinerario');
-const abaHistorico = document.querySelector('#abaHistorico');
 
-const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+function verificaExistenciaUsuario(){
+    const opcaoCadastro = document.querySelector('#realizarCadastro');
+    const opcoesPerfil = document.querySelectorAll('.opcaoPerfil');
 
-if(usuario){
-    if(opcaoCadastro){
-        opcaoCadastro.style.display = 'none';
-    }
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-} else {
-    if(opcoesPerfil.length > 0){
-        opcoesPerfil.forEach(elemento => elemento.style.display = 'none');
-    }
+    if(usuarioLogado){
+        if(opcaoCadastro){
+            opcaoCadastro.style.display = 'none';
+        }
 
-    if(opcaoCadastro){
-        opcaoCadastro.addEventListener('click', () => {
-            window.location.replace('../html/cadastro.html');
-        });
-    }
+    } else {
+        if(opcoesPerfil.length > 0){
+            opcoesPerfil.forEach(elemento => elemento.style.display = 'none');
+        }
 
-    if(abaItinerario && abaHistorico){
-        abaItinerario.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Cadastre-se ou faça seu login para acessar a aba Itinerários!');
-            window.location.replace('/index.html');
-        });
+        if(opcaoCadastro){
+            opcaoCadastro.addEventListener('click', () => {
+                window.location.replace('../html/cadastro.html');
+            });
+        }
 
-        abaHistorico.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Cadastre-se ou faça seu login para acessar a aba Histórico!');
-            window.location.replace('/index.html');
-        });
+
+        const abaItinerario = document.querySelector('#abaItinerario');
+        const abaHistorico = document.querySelector('#abaHistorico');
+
+        if(abaItinerario && abaHistorico){
+            abaItinerario.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Cadastre-se ou faça seu login para acessar a aba Itinerários!');
+                window.location.replace('/index.html');
+            });
+
+            abaHistorico.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Cadastre-se ou faça seu login para acessar a aba Histórico!');
+                window.location.replace('/index.html');
+            });
+        }
     }
 }
+
+verificaExistenciaUsuario();
 
 
 
 //para editar as informações do perfil
 
 //abre o modal de edição
-const editarPerfil = document.querySelector('#editarPerfil');
-const modalPerfil = document.querySelector('.modalPerfil');
+function modalEditar(){
+    const editarPerfil = document.querySelector('#editarPerfil');
+    const modalPerfil = document.querySelector('.modalPerfil');
 
-if(editarPerfil && modalPerfil){
-    const modalP = new bootstrap.Modal(modalPerfil);
+    if(editarPerfil && modalPerfil){
+        const modalP = new bootstrap.Modal(modalPerfil);
 
-    editarPerfil.addEventListener('click', (e) => {
-        e.preventDefault();
-        modalP.show();
-    });
+        editarPerfil.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalP.show();
+        });
+    }
 }
 
 
 //adicionar ou atualizar o avatar do usuário
-const editarAvatar = document.querySelector('#editarAvatar');
 
 function controlarSetas(){
-    const esquerda = document.querySelector('#esquerda');
-    const direita = document.querySelector('#direita');
+    const setaEsquerda = document.querySelector('#esquerda');
+    const setaDireita = document.querySelector('#direita');
 
-    if(esquerda && direita){
-        esquerda.style.display = indexAvatar === 0 ? 'none' : 'block';
-        direita.style.display = indexAvatar === avatares.length - 1 ? 'none' : 'block';
+    if(setaEsquerda && setaDireita){
+        setaEsquerda.style.display = indexAvatar === 0 ? 'none' : 'block';
+        setaDireita.style.display = indexAvatar === avatares.length - 1 ? 'none' : 'block';
     }
-}
 
-const setaEsquerda = document.querySelector('#esquerda');
-const setaDireita = document.querySelector('#direita');
+    if(setaEsquerda && setaDireita){
+        setaEsquerda.addEventListener('click', () => {
+            if(indexAvatar > 0){
+                indexAvatar--;
+                atualizaAvatar();
+            }
+        });
 
-if(setaEsquerda && setaDireita){
-    setaEsquerda.addEventListener('click', () => {
-        if(indexAvatar > 0){
-            indexAvatar--;
-            atualizaAvatar();
-        }
-    });
-
-    setaDireita.addEventListener('click', () => {
-        if(indexAvatar < avatares.length - 1){
-            indexAvatar++;
-            atualizaAvatar();
-        }
-    });
+        setaDireita.addEventListener('click', () => {
+            if(indexAvatar < avatares.length - 1){
+                indexAvatar++;
+                atualizaAvatar();
+            }
+        });
+    }
 }
 
 
 function atualizaAvatar(){
+    const editarAvatar = document.querySelector('#editarAvatar');
+
     if(!avatares[indexAvatar]){
         indexAvatar = 0;
     }
@@ -160,20 +163,20 @@ function atualizaAvatar(){
     }
 }
 
+
 exibeInformacoes();
 atualizaAvatar();
+modalEditar();
 
 
 //atualiza as informações (nome e/ou senha)
-
 function validacoes(nomePerfil, senhaAtual, novaSenha){
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
+    
     let senhaNova = '';
     let novoNome = '';
-
+    
     if(nomePerfil.value.trim() != ''){
-
         if(nomePerfil.validity.patternMismatch){
             alert('Use apenas letras maiusculas ou minusculas no campo nome');
             return false;
@@ -202,7 +205,7 @@ function validacoes(nomePerfil, senhaAtual, novaSenha){
         senhaNova = novaSenha.value.trim(); 
     }
 
-    return {senhaNova, novoNome};
+    return {novoNome, senhaNova};
 }
 
 
@@ -211,14 +214,17 @@ const salvar = document.querySelector('#salvarPerfil');
 
 if(salvar){
     salvar.addEventListener('click', (e) => {
+        e.preventDefault();
+
         const nomePerfil = document.querySelector('#nomePerfil');
         const senhaAtual = document.querySelector('#senhaAtual');
         const novaSenha = document.querySelector('#senhaNova');
-    
+
+
         const valores = validacoes(nomePerfil, senhaAtual, novaSenha);
 
         if(valores){
-            const {senhaNova, novoNome} = valores;
+            const {novoNome, senhaNova} = valores;
 
             const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
             const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -263,3 +269,12 @@ if(sair){
         window.location.replace('../index.html');
     }); 
 }
+
+
+
+
+
+
+
+
+

@@ -8,7 +8,7 @@
 }
 
 .subtitulo{
-    margin: 30px;
+    margin: 30px 30px 0 30px;
     padding: 10px 15px;
 
     font-family: 'Oswald', sans-serif;
@@ -17,8 +17,44 @@
 }
 
 .container-conteudo{
-    margin: 0 30px;
-    width: 90%;
+    margin: 10px 30px;
+    padding: 10px 10px;
+    background-color: #f1fec680;
+    border-radius: 20px;
+}
 
-    border: 1px solid black;
+
+.card{
+    background-color: #F1FEC6;
+    border: 2px solid #F1FEC6;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 10px;
+    margin: 20px 0px;
+}
+
+.card-linha{
+    font-family: 'Oswald', sans-serif;
+    color: #04191F;
+    font-size: 16px;
+    margin-top: 5px;
+    width: 60%;
+}
+
+.opcoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 30px;
+}
+
+.informacoes{
+    color: #A31300;
+}
+
+.salvarLinha{
+    color: #236e70;
 }

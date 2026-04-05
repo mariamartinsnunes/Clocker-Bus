@@ -162,7 +162,7 @@ main {
 
 .card-img {
     width: 100px;
-    height: 70px;
+    height: 90px;
     background-color: #ccc;
     background-image: url('https://via.placeholder.com/100x70?text=Mapa'); 
     background-size: cover;
