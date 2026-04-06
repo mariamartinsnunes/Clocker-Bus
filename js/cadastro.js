@@ -3,9 +3,6 @@
 
 //cadastro 
 
-let usuariosCadastrados = [];
-let usuarioLogado;
-
 const nome = document.querySelector('#nome');
 const email = document.querySelector('#email'); 
 const senha = document.querySelector('#senha');
@@ -51,7 +48,7 @@ function validacoes(){
 
 
 function cadastroUsuario(){
-    usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+    let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const usuario = {
         nome: nome.value.trim(),
@@ -60,7 +57,7 @@ function cadastroUsuario(){
         avatar: '/imagens/avatares/avatar0.png',
         itinerariosSalvos: [],
         historicoLinhas: [],
-        linhasSalvas: []
+        linhasSalvas: []  //caso a parte me meus favoritos / linhas salvas seja implementada
     };
 
     usuariosCadastrados.push(usuario);
@@ -78,7 +75,7 @@ if(formulario){
         e.preventDefault();
 
         if(validacoes()){
-            usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+            let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
             let emailExiste = false;
             usuariosCadastrados.forEach(function(usuario){
@@ -112,6 +109,7 @@ if(formulario){
 
 // ------------------------------------------------------------------------------
 
+
 //login
 
 const emailLogin = document.querySelector('#emailLogin');
@@ -143,7 +141,7 @@ if(formLogin){
             let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
             
             let cadastroExiste = false;
-            usuarioLogado = null;
+            let usuarioLogado = null;
 
             for(let i = 0; i < usuariosCadastrados.length; i++){
                 let usuario = usuariosCadastrados[i];

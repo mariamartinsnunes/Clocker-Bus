@@ -65,9 +65,10 @@ const abaItinerario = document.querySelector('#abaItinerario');
 const abaHistorico = document.querySelector('#abaHistorico');
 
 
-const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+console.log(usuarioLogado);
 
-if(usuario){
+if(usuarioLogado){
     if(opcaoCadastro){
         opcaoCadastro.style.display = 'none';
     }
