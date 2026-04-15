@@ -200,7 +200,7 @@ let tabelaAtual = null;
 
 const addItinerario = document.querySelectorAll('.novoItinerario');
 
-if(addItinerario.length > 0){
+if(addItinerario.length >= 3){
     addItinerario[indexManha].addEventListener('click', (e) =>{
         e.preventDefault();
 
@@ -237,6 +237,7 @@ function exibeItinerarios(){
 
         salvos.forEach(id => {
             const itinerario = itinerariosValidos.find(i => i.id === id);
+            if(!itinerario) return;
 
             if(periodo(itinerario.saida, tabelaManha)){
                 addLinha(tabelaManha, itinerario);
@@ -288,6 +289,12 @@ if(salvarItinerario){
         const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {itinerariosSalvos: []};
 
         let index = usuariosCadastrados.findIndex(usuario => usuario.email === usuarioLogado.email);
+        
+        //o site pode travar sem essa validação
+        if(index === -1){
+            return;
+        }
+
         
         if(!usuarioLogado.itinerariosSalvos.includes(itinerario.id)){
             usuarioLogado.itinerariosSalvos.push(itinerario.id);
