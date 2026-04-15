@@ -21,10 +21,19 @@ const avatares = [
 let indexAvatar = 0;
 
 
+function lerStorage(chave){
+    try{
+        return JSON.parse(localStorage.getItem(chave));
+    } catch {
+        return null;
+    }
+}
+
+
 
 //adicionado as informações do usuário logado na página
 function exibeDados(){
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const usuarioLogado = lerStorage("usuarioLogado");
     const exibirAvatar = document.querySelector('#exibirAvatar');
 
     const nomeUsuario = document.querySelector('#nomeUsuario');
@@ -65,7 +74,7 @@ const abaItinerario = document.querySelector('#abaItinerario');
 const abaHistorico = document.querySelector('#abaHistorico');
 
 
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+const usuarioLogado = lerStorage("usuarioLogado");
 console.log(usuarioLogado);
 
 if(usuarioLogado){
@@ -168,7 +177,7 @@ atualizaAvatar();
 
 //atualiza as informações (nome e/ou senha)
 function validacoes(nomePerfil, senhaAtual, novaSenha){
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const usuarioLogado = lerStorage("usuarioLogado");
 
     let senhaNova = '';
     let novoNome = '';
@@ -221,11 +230,18 @@ if(salvar){
         if(valores){
             const {senhaNova, novoNome} = valores;
 
-            const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
-            const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+            const usuariosCadastrados = lerStorage("usuarios") || [];
+            const usuarioLogado = lerStorage("usuarioLogado");
 
             let index = usuariosCadastrados.findIndex(usuario => usuario.email === usuarioLogado.email);
             
+            //o site pode travar sem essa validação
+            if(index === -1){
+                alert('Erro: usuário não encontrado. Tente fazer o login novamente');
+                return;
+            }
+            
+
             if(novoNome !== ''){
                 usuarioLogado.nome = novoNome;
                 usuariosCadastrados[index].nome = novoNome;
