@@ -283,6 +283,14 @@ if(sair){
 
 
 
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+module.exports = { validacoes }; 
+
+
+// --------------------------------------------------------------------------------------
+
 //AVISO
 function emDesenvolvimento(nome) {
     const aviso = document.getElementById("avisoDev");

@@ -390,3 +390,9 @@ document.addEventListener('click', (event) => {
 
 //assim que o usuário clica no botão de excluir, o itinerário é excluido
 //o ideal é que antes apareça uma mensagem de confirmação, perguntando se ele realmente deseja excluir o itinerário
+
+
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+module.exports = {itinerariosValidos, verificaExistencia, periodo, tabelaManha, tabelaTarde, tabelaNoite};

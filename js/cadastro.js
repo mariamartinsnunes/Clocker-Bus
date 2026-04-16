@@ -3,12 +3,11 @@
 
 //cadastro 
 
-const nome = document.querySelector('#nome');
-const email = document.querySelector('#email'); 
-const senha = document.querySelector('#senha');
-
-
 function validacoes(){
+    const nome = document.querySelector('#nome');
+    const email = document.querySelector('#email'); 
+    const senha = document.querySelector('#senha');
+
     if(nome.value.length == 0){
         alert('O nome é obrigatório');
         return false;
@@ -48,6 +47,10 @@ function validacoes(){
 
 
 function cadastroUsuario(){
+    const nome = document.querySelector('#nome');
+    const email = document.querySelector('#email'); 
+    const senha = document.querySelector('#senha');
+
     let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     const usuario = {
@@ -112,11 +115,11 @@ if(formulario){
 
 //login
 
-const emailLogin = document.querySelector('#emailLogin');
-const senhaLogin = document.querySelector('#senhaLogin');
-
-
 function validacaoLogin(){
+    const emailLogin = document.querySelector('#emailLogin');
+    const senhaLogin = document.querySelector('#senhaLogin');
+
+
     if(emailLogin.value.length == 0){
         alert('Informe o email para o login');
         return false;
@@ -136,6 +139,9 @@ const formLogin = document.querySelector('#formLogin');
 if(formLogin){
     formLogin.addEventListener('submit', function(e){
         e.preventDefault();
+
+        const emailLogin = document.querySelector('#emailLogin');
+        const senhaLogin = document.querySelector('#senhaLogin');
 
         if(validacaoLogin()){
             let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -167,4 +173,13 @@ if(formLogin){
             }
         }
     });
+}
+
+
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+
+if (typeof module !== 'undefined') {
+    module.exports = { validacoes };
 }
