@@ -16,6 +16,13 @@
 
     <link rel="icon" type="image/png" href="./imagens/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
+
+
+    <style>
+        #rotas{
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -34,21 +41,22 @@
 
     <div class="busca-container">
         <h2 class="font-oswald">Buscar Rota</h2>
+        <p>Digite o endereço do seu ponto de partida, o endereço do seu destino ou ambos para encontrar as rotas disponíveis</p> <br>
+        
         <div class="inputs-busca">
             <input type="text" class="input-pill" placeholder="Adicione sua localização atual">
             <input type="text" class="input-pill" placeholder="Adicione a localização do seu destino">
 
         </div>
         <button class="button-buscar">Buscar</button>
+        <!--talvez seja interessante adicionar um botão de limpar aqui-->
     </div>
 
     <main>
-        <div class="coluna">
+        <div class="coluna" id="rotas">
             <h3 class="titulo-secao font-oswald">Principais Rotas</h3>
 
             <div id="container-rotas"></div>
-
-            <button class="button-add" id="btn-adicionar"><i class="fa-solid fa-plus"></i></button>
         </div>
 
         <div class="modal fade" id="informacoesLinha" tabindex="-1">
@@ -65,6 +73,9 @@
             </div>
         </div>
 
+        <!--  
+        Como essa parte ainda não está funcionando, não faz sentido ela ser exibida 
+        
         <div class="coluna">
             <h3 class="titulo-secao font-oswald">Ônibus próximo a você </h3>
             <div class="mapa-container">
@@ -73,6 +84,7 @@
                 <i class="fa-solid fa-location-dot pino-mapa pino-3"></i>
             </div>
         </div>
+        -->
     </main>
 
     <footer>
