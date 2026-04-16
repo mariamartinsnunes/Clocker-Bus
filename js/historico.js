@@ -1,5 +1,7 @@
 //essa função é a mesma que tem em principaisRotas.js - exibe as informações da linha
 function exibeInformacoesLinha(linha){
+    const informacoesLinha = document.querySelector('#informacoesLinha');
+
     if(informacoesLinha){
         const conteudoLinha = document.querySelector('#conteudoLinha');
         conteudoLinha.innerHTML = '';
@@ -28,12 +30,13 @@ function exibeInformacoesLinha(linha){
 
 
 //e quando o usuário clica no 'Mais Informações' de uma linha, a função é chamada e o modal é aberto
-const rotasSalvas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
-const informacoesLinha = document.querySelector('#informacoesLinha');
 
 document.addEventListener('click', (event) => {
     if(event.target.classList.contains('informacoes')){
         event.preventDefault();
+
+        const rotasSalvas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
+        const informacoesLinha = document.querySelector('#informacoesLinha');
 
         const info = event.target;
         const idRota = Number(info.dataset.rotaId);
@@ -51,11 +54,13 @@ document.addEventListener('click', (event) => {
 
 
 //o histórico do usuário logado é puxado e os cards das linhas são criados e exibidos
-const historico = document.querySelector('#historico');
 
 function exibeHistorico(){
+    const rotasSalvas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
     const listaLinhas = usuarioLogado.historicoLinhas || [];
+
+    const historico = document.querySelector('#historico');
 
     if(!historico){
         return;
@@ -92,3 +97,14 @@ function exibeHistorico(){
 }
 
 window.addEventListener('DOMContentLoaded', exibeHistorico);
+
+
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        exibeInformacoesLinha,
+        exibeHistorico
+    };
+}

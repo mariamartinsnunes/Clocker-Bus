@@ -5,7 +5,7 @@ const itinerariosValidos = [
         origem: 'Rua das Palmeiras',
         saida: '07:00',
         chegada: '07:40',
-        destino: 'Avenida Brasil, 950',
+        destino: 'Avenida Brasil',
         paradas: [
             'Rua do Comércio',
             'Praça Central'
@@ -13,100 +13,100 @@ const itinerariosValidos = [
     },
     {
         id: 2,
-        origem: 'Avenida Paulista, 1500',
+        origem: 'Avenida Paulista',
         saida: '08:10',
         chegada: '08:35',
-        destino: 'Rua Augusta, 300',
+        destino: 'Rua Augusta',
         paradas: [
-            'Rua Haddock Lobo, 200'
+            'Rua Haddock Lobo'
         ]
     },
     {
         id: 3,
-        origem: 'Rua XV de Novembro, 78',
+        origem: 'Rua XV de Novembro',
         saida: '09:00',
         chegada: '09:50',
-        destino: 'Avenida Independência, 450',
+        destino: 'Avenida Independência',
         paradas: [
-            'Rua Sete de Setembro, 120',
+            'Rua Sete de Setembro',
             'Praça Central',
             'Praça da Matriz'
         ]
     },
     {
         id: 4,
-        origem: 'Rua das Flores, 95',
+        origem: 'Rua das Flores',
         saida: '10:15',
         chegada: '11:00',
-        destino: 'Rua dos Andradas, 40',
+        destino: 'Rua dos Andradas',
         paradas: [
-            'Rua das Nações, 873',
-            'Avenida Brasil, 890'
+            'Rua das Nações',
+            'Avenida Brasil'
         ]
     },
     {
         id: 5,
-        origem: 'Rua Santa Luzia, 310',
+        origem: 'Rua Santa Luzia',
         saida: '11:20',
         chegada: '12:00',
-        destino: 'Avenida Getúlio Vargas, 780',
+        destino: 'Avenida Getúlio Vargas',
         paradas: []
     },
     {
         id: 6,
-        origem: 'Avenida Rio Branco, 500',
+        origem: 'Avenida Rio Branco',
         saida: '13:00',
         chegada: '14:10',
-        destino: 'Rua São João, 210',
+        destino: 'Rua São João',
         paradas: [
-            'Rua da Consolação, 35',
+            'Rua da Consolação',
             'Largo do Arouche',
-            'Rua da Liberdade, 407'
+            'Rua da Liberdade'
         ]
     },
     {
         id: 7,
-        origem: 'Rua das Acácias, 99',
+        origem: 'Rua das Acácias',
         saida: '15:30',
         chegada: '16:20',
-        destino: 'Avenida dos Estados, 1800',
+        destino: 'Avenida dos Estados',
         paradas: [
-            'Rua dos Lírios, 456',
+            'Rua dos Lírios',
             'Praça Central'
         ]
     },
     {
         id: 8,
-        origem: 'Avenida Santos Dumont, 670',
+        origem: 'Avenida Santos Dumont',
         saida: '16:50',
         chegada: '18:00',
-        destino: 'Rua Marechal Deodoro, 120',
+        destino: 'Rua Marechal Deodoro',
         paradas: [
             'Rua Barão do Rio Branco',
             'Terminal',
             'Praça Verde',
-            'Rua das Oliveiras, 65'
+            'Rua das Oliveiras'
         ]
     },
     {
         id: 9,
-        origem: 'Rua das Oliveiras, 45',
+        origem: 'Rua das Oliveiras',
         saida: '18:20',
         chegada: '19:00',
-        destino: 'Avenida Industrial, 981',
+        destino: 'Avenida Industrial',
         paradas: [
-            'Rua do Progresso, 150',
+            'Rua do Progresso',
             'Praça das Indústrias'
         ]
     },
     {
         id: 10,
-        origem: 'Avenida Presidente Vargas, 100',
+        origem: 'Avenida Presidente Vargas',
         saida: '19:40',
         chegada: '20:30',
-        destino: 'Rua Bela Vista, 210',
+        destino: 'Rua Bela Vista',
         paradas: [
-            'Rua da Paz, 02',
+            'Rua da Paz',
             'Terminal'
         ]
     }

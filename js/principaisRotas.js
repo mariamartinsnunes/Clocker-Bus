@@ -1,6 +1,5 @@
 localStorage.removeItem('rotasClockerBus');
 
-const containerRotas = document.getElementById('container-rotas');
 
 function obterRotas() {
     let rotaSalva = JSON.parse(localStorage.getItem('rotasClockerBus'));
@@ -91,10 +90,11 @@ function obterRotas() {
     return rotaSalva;
 }
 
-//mudei o botao embaixo das principais rotas
 
 let mostrarTodasAsRotas = false;
+
 function carregarRotas(rotasFiltradas = null) {
+    const containerRotas = document.getElementById('container-rotas');
     if(!containerRotas) return;
 
     const rotas = rotasFiltradas || obterRotas();
@@ -168,8 +168,6 @@ function carregarRotas(rotasFiltradas = null) {
 }
 
 
-//pfv textem a opção de busca para ver se deu certo - Murilo
-//buscar rotas
 function buscarRotas(origem, destino) {
     const rotas = obterRotas();
     const termoOrigem = origem.toLowerCase().trim();
@@ -200,6 +198,7 @@ if (btnBuscarHome) {
     });
 }
 
+
 const btnBuscarHist = document.querySelector('.btn-buscar-historico');
 if (btnBuscarHist) {
     btnBuscarHist.addEventListener('click', (e) => {
@@ -211,10 +210,13 @@ if (btnBuscarHist) {
     });
 }
 
+
 function exibeInformacoesLinha(linha){
     if(informacoesLinha){
+        const informacoesLinha = document.querySelector('#informacoesLinha');
         const conteudoLinha = document.querySelector('#conteudoLinha');
         conteudoLinha.innerHTML = '';
+
         if(linha){
             conteudoLinha.innerHTML = `
                 <p><strong>Linha:</strong> ${linha.linha}</p>
@@ -233,6 +235,7 @@ function exibeInformacoesLinha(linha){
         } 
     }
 }
+
 
 function atualizaHistorico(idRota){
     const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -255,7 +258,7 @@ function atualizaHistorico(idRota){
     }
 }
 
-const informacoesLinha = document.querySelector('#informacoesLinha');
+
 document.addEventListener('click', (e) => {
     if(e.target.classList.contains('card-link')){
         e.preventDefault();
@@ -276,3 +279,17 @@ document.addEventListener('click', (e) => {
 });
 
 carregarRotas();
+
+
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        obterRotas,
+        carregarRotas,
+        buscarRotas,
+        exibeInformacoesLinha,
+        atualizaHistorico
+    };
+}

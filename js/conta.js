@@ -96,13 +96,13 @@ if(usuarioLogado){
     if(abaItinerario && abaHistorico){
         abaItinerario.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Cadastre-se ou faça seu login para acessar a aba Itinerários!');
+            alert('Cadastre-se ou faça seu login na aba "Minha Conta" para acessar aos Itinerários!');
             window.location.replace('/index.html');
         });
 
         abaHistorico.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Cadastre-se ou faça seu login para acessar a aba Histórico!');
+            alert('Cadastre-se ou faça seu login na aba "Minha Conta" para acessar ao Histórico!');
             window.location.replace('/index.html');
         });
     }
@@ -282,13 +282,6 @@ if(sair){
 }
 
 
-
-// --------------------------------------------------------------------------------------
-
-// PARA OS TESTES USANDO JEST
-module.exports = { validacoes }; 
-
-
 // --------------------------------------------------------------------------------------
 
 //AVISO
@@ -318,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnFavoritos.addEventListener('click', (e) => {
             e.preventDefault();
             emDesenvolvimento('Meus Favoritos');
+            console.log("clicou favoritos");
         });
     }
 
@@ -328,3 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+// --------------------------------------------------------------------------------------
+
+// PARA OS TESTES USANDO JEST
+module.exports = { validacoes }; 
