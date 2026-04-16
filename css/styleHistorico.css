@@ -4,7 +4,8 @@
 }
 
 #container-historico section{
-    width: 50%;
+    width: 60%;  /*antes era 50%*/
+    margin: auto;  /*tirar isso depois*/
 }
 
 .subtitulo{

@@ -280,3 +280,43 @@ if(sair){
         window.location.replace('../index.html');
     }); 
 }
+
+
+
+//AVISO
+function emDesenvolvimento(nome) {
+    const aviso = document.getElementById("avisoDev");
+    const mensagem = document.getElementById("mensagemAviso");
+
+    if(!aviso || !mensagem) return;
+
+    mensagem.innerText = `${nome} ainda está em desenvolvimento.`;
+
+    aviso.classList.add("show");
+
+    setTimeout(() => {
+        aviso.classList.remove("show");
+    }, 1500);
+}
+
+
+//EM DESENVOLVIMENTO
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btnFavoritos = document.querySelector('#btnFavoritos');
+    const btnConfiguracoes = document.querySelector('#btnConfiguracoes');
+
+    if(btnFavoritos){
+        btnFavoritos.addEventListener('click', (e) => {
+            e.preventDefault();
+            emDesenvolvimento('Meus Favoritos');
+        });
+    }
+
+    if(btnConfiguracoes){
+        btnConfiguracoes.addEventListener('click', (e) => {
+            e.preventDefault();
+            emDesenvolvimento('Configurações');
+        });
+    }
+});

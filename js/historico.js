@@ -78,7 +78,6 @@ function exibeHistorico(){
                         <p>Pontualidade: <b>${linha.previsao}</b></p>
                         <div class="opcoes">
                             <a class="informacoes" data-rota-id="${linha.id}" href="#">Mais Informações</a>
-                            <strong><a class="salvarLinha" data-rota-id="${linha.id}" href="#">Salvar</a></strong>
                         </div>
                     </div>
                 `;
