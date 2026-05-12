@@ -112,17 +112,78 @@ const itinerariosValidos = [
     }
 ];
 
-//com a implementação da API, podemos usar endereços reais (eu acho)
 
 
-//indice de cada tabela
+//função para exibir os itinerários válidos no modal
+function exibirListaItinerarios(){
+    const lista = document.querySelector("#cardsModal");
+    lista.innerHTML = "";
+
+
+    itinerariosValidos.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "item-modal";
+
+        card.innerHTML = `
+            <div class="info">
+                <p class="trajeto"><strong>${item.origem} <i class="fa-solid fa-arrow-right"></i> ${item.destino}</strong></p>
+                <p><strong><i class="fa-solid fa-clock"></i> Horário de saída: ${item.saida}</strong></p>
+            </div>
+            <button type="button" class="btn-selecionar-modal select" onclick="selecionarItinerario(this, ${item.id})">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>Selecionar</span>
+            </button>
+        `;
+
+        lista.appendChild(card);
+    });
+}
+
+
+
 const indexManha = 0;
 const indexTarde = 1;
 const indexNoite = 2;
 
 
-//abre o modal para adicionar as informações de um novo itinerário
+const colunaManha = document.querySelector('#manha');
+const colunaTarde = document.querySelector('#tarde');
+const colunaNoite = document.querySelector('#noite');
+
+let colunaAtual = null;
+
+
+const colunaTurno = document.querySelectorAll('.novoItinerario');
+
+if(colunaTurno.length >= 3){
+    colunaTurno[indexManha].addEventListener('click', (e) =>{
+        e.preventDefault();
+
+        colunaAtual = colunaManha;
+        modalItinerario();
+    });
+
+    colunaTurno[indexTarde].addEventListener('click', (e) => {
+        e.preventDefault();
+
+        colunaAtual = colunaTarde;
+        modalItinerario();
+    });
+
+    colunaTurno[indexNoite].addEventListener('click', (e) => {
+        e.preventDefault();
+
+        colunaAtual = colunaNoite;
+        modalItinerario();
+    });
+}
+
+
+
+//abre o modal para adicionar um novo itinerário
 function modalItinerario(){
+    exibirListaItinerarios()
+
     const modalItinerario = document.querySelector('#modalItinerario');
 
     if(modalItinerario){
@@ -132,28 +193,45 @@ function modalItinerario(){
 }
 
 
-//verifica a existência do itinerário
-function verificaExistencia(origemInput, destinoInput){
-    return itinerariosValidos.find(itinerario => 
-        itinerario.origem.toLowerCase().trim() === origemInput.toLowerCase().trim() &&
-        itinerario.destino.toLowerCase().trim() === destinoInput.toLowerCase().trim()
-    ) || null;
+
+//adiciona o novo itinerário na coluna correspondente 
+function addCardI(coluna, itinerario){
+    const novoCard = document.createElement('div');
+    novoCard.className = 'cardSalvo';
+
+    novoCard.innerHTML = `
+        <div class="enderecos">
+            <i class="fa-solid fa-location-dot"></i>
+            <strong>${itinerario.origem} - ${itinerario.destino}</strong>
+        </div>
+        <hr>
+        <p><strong><i class="fa-solid fa-clock"></i>  Saída: ${itinerario.saida}</strong></p>
+        <p><strong><i class="fa-solid fa-clock"></i>  Chegada prevista: ${itinerario.chegada}</strong></p>
+        <div class="botoesI">
+            <button class='buscarPontos' data-itinerario-id='${itinerario.id}'>Buscar</button>
+            <button class='excluirItinerario' data-itinerario-id='${itinerario.id}'>Exluir</button>
+        </div>
+    `;
+
+    coluna.appendChild(novoCard);
+    //alert('Itinerário salvo com sucesso!');
 }
 
 
+
 //valida o período do itinerário
-function periodo(horario, tabelaAtual){
+function periodo(horario, colunaAtual){
     const hora = parseInt(horario.split(':')[0]);
 
-    if(tabelaAtual === tabelaManha){
+    if(colunaAtual === colunaManha){
         return hora >= 5 && hora < 12;
     }
     
-    if(tabelaAtual === tabelaTarde){
+    if(colunaAtual === colunaTarde){
         return hora >= 12 && hora < 18;
     }
     
-    if(tabelaAtual === tabelaNoite){
+    if(colunaAtual === colunaNoite){
         return hora >= 18 && hora < 23;
     }
 
@@ -161,77 +239,15 @@ function periodo(horario, tabelaAtual){
 }
 
 
-//adiciona o novo itinerário na tabela correspondente 
-function addLinha(tabela, itinerario){
-    const linhas = tabela.querySelectorAll('tr.linha');
-
-    for(const linha of linhas){
-        if(linha.children[0].textContent === itinerario.origem && 
-           linha.children[1].textContent === itinerario.saida &&
-           linha.children[2].textContent === itinerario.chegada &&
-           linha.children[3].textContent === itinerario.destino){
-
-            return;
-        }
-    }
-
-    const linha = document.createElement('tr');
-    linha.className = 'linha';
-
-    linha.innerHTML = `
-        <td>${itinerario.origem}</td>
-        <td>${itinerario.saida}</td>
-        <td>${itinerario.chegada}</td>
-        <td>${itinerario.destino}</td>
-        <td><button class='buscarPontos' data-itinerario-id='${itinerario.id}'>Buscar</button></td>
-        <td><button class='excluirItinerario' data-itinerario-id='${itinerario.id}'>Exluir</button></td>
-    `;
-
-    tabela.appendChild(linha);
-    //alert('Itinerário salvo com sucesso!');
-}
-
-
-const tabelaManha = document.querySelector('#manha');
-const tabelaTarde = document.querySelector('#tarde');
-const tabelaNoite = document.querySelector('#noite');
-
-let tabelaAtual = null;
-
-const addItinerario = document.querySelectorAll('.novoItinerario');
-
-if(addItinerario.length >= 3){
-    addItinerario[indexManha].addEventListener('click', (e) =>{
-        e.preventDefault();
-
-        tabelaAtual = tabelaManha;
-        modalItinerario();
-    });
-
-    addItinerario[indexTarde].addEventListener('click', (e) => {
-        e.preventDefault();
-
-        tabelaAtual = tabelaTarde;
-        modalItinerario();
-    });
-
-    addItinerario[indexNoite].addEventListener('click', (e) => {
-        e.preventDefault();
-
-        tabelaAtual = tabelaNoite;
-        modalItinerario();
-    });
-}
-
 
 //relaciona os itinerarios ao usuário logado
 function exibeItinerarios(){
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
     if(usuarioLogado){        
-        tabelaManha.innerHTML = '';
-        tabelaTarde.innerHTML = '';
-        tabelaNoite.innerHTML = '';
+        colunaManha.innerHTML = '';
+        colunaTarde.innerHTML = '';
+        colunaNoite.innerHTML = '';
 
         let salvos = usuarioLogado.itinerariosSalvos;
 
@@ -239,20 +255,35 @@ function exibeItinerarios(){
             const itinerario = itinerariosValidos.find(i => i.id === id);
             if(!itinerario) return;
 
-            if(periodo(itinerario.saida, tabelaManha)){
-                addLinha(tabelaManha, itinerario);
+            if(periodo(itinerario.saida, colunaManha)){
+                addCardI(colunaManha, itinerario);
 
-            } else if(periodo(itinerario.saida, tabelaTarde)){
-                addLinha(tabelaTarde, itinerario);
+            } else if(periodo(itinerario.saida, colunaTarde)){
+                addCardI(colunaTarde, itinerario);
             
             } else {
-                addLinha(tabelaNoite, itinerario);
+                addCardI(colunaNoite, itinerario);
             }
         });
     }
 }
 
 window.addEventListener('DOMContentLoaded', exibeItinerarios);
+
+
+
+//para selecionar um itinerário
+function selecionarItinerario(botao, id){
+    const itensModal = document.querySelectorAll(".item-modal");
+    itensModal.forEach(card => card.classList.remove('selecionado'));
+    
+    const selecionado = botao.closest('.item-modal');
+    selecionado.classList.add('selecionado');
+
+    const modalItinerario = document.querySelector('#modalItinerario');
+    modalItinerario.dataset.itinerarioSelecionado = id;
+}
+
 
 
 //salva e exibe o itinerário na tabela
@@ -262,25 +293,24 @@ if(salvarItinerario){
     salvarItinerario.addEventListener('click', (e) => {
         e.preventDefault();
 
-        const origemInput = document.querySelector('#endSaida').value.trim();
-        const destinoInput = document.querySelector('#endChegada').value.trim();
+        const modal = document.querySelector('#modalItinerario');
 
-        if(!origemInput || !destinoInput){
-            alert('Preencha todos os campos');
-            return;
-        } 
-        
-        const itinerario = verificaExistencia(origemInput, destinoInput);
-
-        if(!itinerario){
-            alert('O itinerário informado não existe');
-            document.querySelector('#formItinerarios').reset();
+        const idSelecionado = Number(modal.dataset.itinerarioSelecionado);
+        if(!idSelecionado){
+            alert('Selecione um itinerário');
             return;
         }
 
-        if(!periodo(itinerario.saida, tabelaAtual)){
-            alert('O horário do itinerário não corresponde ao período da tabela');
-            document.querySelector('#formItinerarios').reset();
+
+        const itinerario = itinerariosValidos.find(i => i.id === idSelecionado);
+        if(!itinerario){
+            alert('Itinerário inválido');
+            return;
+        }
+
+
+        if(!periodo(itinerario.saida, colunaAtual)){
+            alert('O horário do itinerário não corresponde ao período selecionado');
             return;
         }
 
@@ -295,6 +325,7 @@ if(salvarItinerario){
             return;
         }
 
+
         
         if(!usuarioLogado.itinerariosSalvos.includes(itinerario.id)){
             usuarioLogado.itinerariosSalvos.push(itinerario.id);
@@ -302,15 +333,18 @@ if(salvarItinerario){
 
             localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
             localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-        }
-    
 
-        if(tabelaAtual){
-            addLinha(tabelaAtual, itinerario);
+            addCardI(colunaAtual, itinerario);
+        
+        } else {
+            alert('Itinerário já salvo');
         }
-        document.querySelector('#formItinerarios').reset();
+
+
+        delete modal.dataset.itinerarioSelecionado;
     });
 }
+
 
 
 //com o itinerário salvo, o usuário tem a opção de buscar os pontos de parada
@@ -395,4 +429,4 @@ document.addEventListener('click', (event) => {
 // --------------------------------------------------------------------------------------
 
 // PARA OS TESTES USANDO JEST
-module.exports = {itinerariosValidos, verificaExistencia, periodo, tabelaManha, tabelaTarde, tabelaNoite};
+//module.exports = {itinerariosValidos, periodo, tabelaManha, tabelaTarde, tabelaNoite};

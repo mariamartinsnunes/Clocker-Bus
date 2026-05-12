@@ -72,70 +72,34 @@
         </div>
 
 
-        <div class="tabelas">
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="6">Manhã</th>
-                    </tr>
-                    <tr>
-                        <th>Endereço Saída</th>
-                        <th>Horário Saída</th>
-                        <th>Previsão de Chegada</th>
-                        <th>Endereço Destino</th>
-                        <th>Pontos de Parada</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="manha"></tbody>
-            </table>
+        <div class="colunasTabelas">
 
-            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
+            <section class="coluna-turno">
+                <h2 class="titulo-turno"><i class="fa-regular fa-sun"></i>  Manhã</h2>
+                <hr>
+                <div id="manha" class="cards"></div>
+                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
+            </section>
+
+
+            <section class="coluna-turno">
+                <h2 class="titulo-turno"><i class="fa-solid fa-cloud-sun"></i>  Tarde</h2>
+                <hr>
+                <div id="tarde" class="cards"></div>
+                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
+            </section>
+
+
+            <section class="coluna-turno">
+                <h2 class="titulo-turno"><i class="fa-solid fa-moon"></i>  Noite</h2>
+                <hr>
+                <div id="noite" class="cards"></div>
+                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
+            </section>
+
         </div>
 
 
-        <div class="tabelas">
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="6">Tarde</th>
-                    </tr>
-                    <tr>
-                        <th>Endereço Saída</th>
-                        <th>Horário Saída</th>
-                        <th>Previsão de Chegada</th>
-                        <th>Endereço Destino</th>
-                        <th>Pontos de Parada</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="tarde"></tbody>
-            </table>
-
-            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
-        </div>
-
-
-        <div class="tabelas">
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="6">Noite</th>
-                    </tr>
-                    <tr>
-                        <th>Endereço Saída</th>
-                        <th>Horário Saída</th>
-                        <th>Previsão de Chegada</th>
-                        <th>Endereço Destino</th>
-                        <th>Pontos de Parada</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="noite"></tbody>
-            </table>
-
-            <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
-        </div>
 
         <div class="modal fade" id="pontosParada" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -164,14 +128,10 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="formItinerarios">
+                    <form id="listaItinerarios">
                         <h5>Adicionar Novo Itinerário</h5>
 
-                        <label for="endSaida">Endereço de saída:</label> <br>
-                        <input type="text" id="endSaida" placeholder="digite aqui"> <br><br>
-                        
-                        <label for="endChegada">Endereço do destino:</label> <br>
-                        <input type="text" id="endChegada" placeholder="digite aqui">
+                        <div id="cardsModal"></div>
                     </form>
                 </div>
 
