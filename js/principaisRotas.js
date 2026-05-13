@@ -9,78 +9,81 @@ function obterRotas() {
             { id: 1, 
                 linha: "042 - Centro / Shopping", 
                 saida: "14:00", 
-                previsao: "No horário", 
-                chegada: "14:45", 
+                status: "No horário", 
+                lotacao: "Baixa",
                 pontos: ["Terminal Central", "Avenida Brasil, 200", "Shopping Plaza"],  
             },
 
             { id: 2, 
                 linha: "015 - Terminal / Bairro da Liberdade", 
-                saida: "14:15", previsao: "Atrasado 5 min", 
-                chegada: "15:05", 
+                saida: "14:15", 
+                status: "Atrasado 5 min", 
+                lotacao: "Alta",
                 pontos: ["Centro", "Avenida Brasil, 890", "Largo da Paz", "Bairro da Liberdade"],  
             },
 
             { id: 3, 
                 linha: "102 - UPA / Centro", 
                 saida: "14:10",
-                previsao: "Chegando", 
-                chegada: "14:12", 
+                status: "Chegando", 
+                lotacao: "Baixa", 
                 pontos: ["UPA Norte", "Rua 15 de Novembro", "Praça da Matriz", "Centro"], 
             },
 
             { id: 4, 
                 linha: "088 - Campus Univ. / Terminal", 
                 saida: "14:30", 
-                previsao: "No horário", 
+                status: "No horário", 
                 chegada: "15:10", 
+                lotacao: "Moderada",
                 pontos: ["Universidade Estadual", "Av. dos Estudantes", "Terminal Central"], 
             },
 
             { id: 5, 
                 linha: "055 - Zona Sul / Distrito Ind.", 
                 saida: "14:05", 
-                previsao: "Atrasado 10 min", 
-                chegada: "14:55", pontos: ["Avenida Sul", "Fábrica de Tecidos", "Distrito Industrial"], 
+                status: "Atrasado 10 min", 
+                lotacao: "Moderada", 
+                pontos: ["Avenida Sul", "Fábrica de Tecidos", "Distrito Industrial"], 
             },
 
             { id: 6, 
                 linha: "021 - Praça Central / Aeroporto", 
                 saida: "14:20", 
-                previsao: "No horário", 
-                chegada: "15:00", 
+                status: "No horário", 
+                lotacao: "Baixa",
                 pontos: ["Praça Central", "Avenida das Nações", "Terminal de Cargas", "Aeroporto"], 
             },
 
             { id: 7, 
                 linha: "074 - Terminal Leste / Mercado", 
                 saida: "14:12",
-                previsao: "Chegando", 
-                chegada: "14:15", 
+                status: "Chegando", 
+                lotacao: "Baixa", 
                 pontos: ["Terminal Leste", "Rua do Comércio", "Mercado Municipal"], 
             },
 
             { id: 8, 
                 linha: "033 - Bairro Esperança / Centro", 
                 saida: "14:40",
-                previsao: "No horário", 
-                chegada: "15:25", 
+                status: "No horário", 
+                lotacao: "Alta",
                 pontos: ["Bairro Esperança", "Rua das Palmeiras", "Avenida da Paz", "Centro"], 
             },
 
             { id: 9, 
                 linha: "099 - Via Expressa / Rodoviária", 
                 saida: "14:25", 
-                previsao: "Atrasado 2 min", 
-                chegada: "14:50", 
+                status: "Atrasado 2 min", 
+                lotacao: "Baixa",
                 pontos: ["Trevo da Via Expressa", "Supermercado Atacadão", "Rodoviária"], 
             },
 
             { id: 10, 
                 linha: "010 - Circular Central", 
                 saida: "14:00", 
-                previsao: "No horário", 
-                chegada: "14:30", 
+                status: "No horário", 
+                lotacao: "Moderada",
                 pontos: ["Terminal Central", "Rua 1", "Rua 2", "Rua 3", "Rua 4"], 
             }
 
@@ -116,18 +119,26 @@ function carregarRotas(rotasFiltradas = null) {
         const card = document.createElement('div');
         card.className = 'card-rota';
 
-        let corPrevisao = "var(--cor-texto-geral)";
-        if(rota.previsao.includes("Atrasado")) corPrevisao = "var(--cor-alerta)"; 
-        if(rota.previsao.includes("Chegando")) corPrevisao = "green"; 
+        let corstatus = "var(--cor-texto-geral)";
+        if(rota.status.includes("Atrasado")) corstatus = "var(--cor-alerta)"; 
+        if(rota.status.includes("Chegando")) corstatus = "green"; 
 
         card.innerHTML = `
             <img src="${rota.imagem || 'https://via.placeholder.com/100x70?text=Mapa'}" class="card-img" alt="Mapa da rota">
-            <div class="card-info">
-                <span>Número da linha: <b>${rota.linha}</b></span>
-                <span>Previsão de saída: <b>${rota.saida}</b></span>
-                <span>Previsão: <b style="color: ${corPrevisao};">${rota.previsao}</b></span>
-                <span>Previsão de chegada: <b>${rota.chegada}</b></span>
-                <a class="card-link" data-rota-id="${rota.id}" href="#">Mais Informações</a>
+            
+            <div class="card-conteudo">
+                <h3><i class="fa-solid fa-bus"></i><strong> ${rota.linha}</strong></h3>
+
+                <div class="card-info">
+                    <div>
+                        <p><i class="fa-solid fa-clock"></i> Previsão de saída: <b>${rota.saida}</b></p>
+                        <p><i class="fa-solid fa-tower-broadcast"></i> Previsão: <b style="color: ${corstatus};">${rota.status}</b></p>
+                    </div>
+                    <div>
+                        <p><i class="fa-solid fa-users"></i> Lotação: <b>${rota.lotacao}</b></p>
+                        <a class="card-link" data-rota-id="${rota.id}" href="#">Mais Informações</a>
+                    </div>
+                </div>
             </div>
         `;
         
@@ -222,7 +233,7 @@ function exibeInformacoesLinha(linha){
                 <p><strong>Linha:</strong> ${linha.linha}</p>
                 <p><strong>Previsão de saída:</strong> ${linha.saida}</p>
                 <p><strong>Previsão de chegada:</strong> ${linha.chegada}</p>
-                <p><strong>Pontualidade:</strong> ${linha.previsao}</p>
+                <p><strong>Pontualidade:</strong> ${linha.status}</p>
                 <p><strong>Rota (pontos de parada):</strong></p>
             `;
             const ul = document.createElement('ul');

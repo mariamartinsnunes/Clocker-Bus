@@ -74,15 +74,25 @@ function exibeHistorico(){
 
             if(linha){
                 const card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'card-rota';
+
+                let corstatus = "var(--cor-texto-geral)";
+                if(linha.status.includes("Atrasado")) corstatus = "var(--cor-alerta)"; 
+                if(linha.status.includes("Chegando")) corstatus = "green"; 
 
                 card.innerHTML = `
-                    <img src="" class="card-img" alt="Mapa da rota">
-                    <div class="card-linha">
-                        <p>Número da linha: <b>${linha.linha}</b></p>
-                        <p>Pontualidade: <b>${linha.previsao}</b></p>
-                        <div class="opcoes">
-                            <a class="informacoes" data-rota-id="${linha.id}" href="#">Mais Informações</a>
+                    <div class="card-conteudo">
+                        <h3><i class="fa-solid fa-bus"></i><strong> ${linha.linha}</strong></h3>
+
+                        <div class="card-info">
+                            <div>
+                                <p><i class="fa-solid fa-clock"></i> Previsão de saída: <b>${linha.saida}</b></p>
+                                <p><i class="fa-solid fa-tower-broadcast"></i> Previsão: <b style="color: ${corstatus};">${linha.status}</b></p>
+                            </div>
+                            <div>
+                                <p><i class="fa-solid fa-users"></i> Lotação: <b>${linha.lotacao}</b></p>
+                                <a class="card-link informacoes" data-rota-id="${linha.id}" href="#">Mais Informações</a>
+                            </div>
                         </div>
                     </div>
                 `;
