@@ -230,10 +230,10 @@ function exibeInformacoesLinha(linha){
 
         if(linha){
             conteudoLinha.innerHTML = `
-                <p><strong>Linha:</strong> ${linha.linha}</p>
-                <p><strong>Previsão de saída:</strong> ${linha.saida}</p>
-                <p><strong>Previsão de chegada:</strong> ${linha.chegada}</p>
-                <p><strong>Pontualidade:</strong> ${linha.status}</p>
+                <h6><strong><i class="fa-solid fa-bus"></i> ${linha.linha}</strong></h6>
+                <br>
+                <p><strong><i class="fa-solid fa-clock"></i> Previsão de saída:</strong> ${linha.saida}</p>
+                <p><strong><i class="fa-solid fa-tower-broadcast"></i> Pontualidade:</strong> ${linha.status}</p>
                 <p><strong>Rota (pontos de parada):</strong></p>
             `;
             const ul = document.createElement('ul');
