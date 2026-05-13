@@ -6,6 +6,8 @@ const itinerariosValidos = [
         saida: '07:00',
         chegada: '07:40',
         destino: 'Avenida Brasil',
+        margemAtraso: 15,
+        status: 'Ativo',
         paradas: [
             'Rua do Comércio',
             'Praça Central'
@@ -17,6 +19,8 @@ const itinerariosValidos = [
         saida: '08:10',
         chegada: '08:35',
         destino: 'Rua Augusta',
+        margemAtraso: 5,
+        status: 'Ativo',
         paradas: [
             'Rua Haddock Lobo'
         ]
@@ -27,6 +31,8 @@ const itinerariosValidos = [
         saida: '09:00',
         chegada: '09:50',
         destino: 'Avenida Independência',
+        margemAtraso: 20,
+        status: 'Ativo',
         paradas: [
             'Rua Sete de Setembro',
             'Praça Central',
@@ -39,6 +45,8 @@ const itinerariosValidos = [
         saida: '10:15',
         chegada: '11:00',
         destino: 'Rua dos Andradas',
+        margemAtraso: 25,
+        status: 'Ativo',
         paradas: [
             'Rua das Nações',
             'Avenida Brasil'
@@ -50,6 +58,8 @@ const itinerariosValidos = [
         saida: '11:20',
         chegada: '12:00',
         destino: 'Avenida Getúlio Vargas',
+        margemAtraso: 10,
+        status: 'Ativo',
         paradas: []
     },
     {
@@ -58,6 +68,8 @@ const itinerariosValidos = [
         saida: '13:00',
         chegada: '14:10',
         destino: 'Rua São João',
+        margemAtraso: 30,
+        status: 'Ativo',
         paradas: [
             'Rua da Consolação',
             'Largo do Arouche',
@@ -70,6 +82,8 @@ const itinerariosValidos = [
         saida: '15:30',
         chegada: '16:20',
         destino: 'Avenida dos Estados',
+        margemAtraso: 10,
+        status: 'Ativo',
         paradas: [
             'Rua dos Lírios',
             'Praça Central'
@@ -81,6 +95,8 @@ const itinerariosValidos = [
         saida: '16:50',
         chegada: '18:00',
         destino: 'Rua Marechal Deodoro',
+        margemAtraso: 20,
+        status: 'Ativo',
         paradas: [
             'Rua Barão do Rio Branco',
             'Terminal',
@@ -94,6 +110,8 @@ const itinerariosValidos = [
         saida: '18:20',
         chegada: '19:00',
         destino: 'Avenida Industrial',
+        margemAtraso: 5,
+        status: 'Ativo',
         paradas: [
             'Rua do Progresso',
             'Praça das Indústrias'
@@ -105,6 +123,8 @@ const itinerariosValidos = [
         saida: '19:40',
         chegada: '20:30',
         destino: 'Rua Bela Vista',
+        margemAtraso: 15,
+        status: 'Ativo',
         paradas: [
             'Rua da Paz',
             'Terminal'
@@ -128,6 +148,7 @@ function exibirListaItinerarios(){
             <div class="info">
                 <p class="trajeto"><strong>${item.origem} <i class="fa-solid fa-arrow-right"></i> ${item.destino}</strong></p>
                 <p><strong><i class="fa-solid fa-clock"></i> Horário de saída: ${item.saida}</strong></p>
+                <p><strong> Tolerância: ${item.margemAtraso} minutos</strong></p>
             </div>
             <button type="button" class="btn-selecionar-modal select" onclick="selecionarItinerario(this, ${item.id})">
                 <i class="fa-solid fa-circle-plus"></i>
@@ -182,7 +203,7 @@ if(colunaTurno.length >= 3){
 
 //abre o modal para adicionar um novo itinerário
 function modalItinerario(){
-    exibirListaItinerarios()
+    exibirListaItinerarios();
 
     const modalItinerario = document.querySelector('#modalItinerario');
 
@@ -205,8 +226,10 @@ function addCardI(coluna, itinerario){
             <strong>${itinerario.origem} - ${itinerario.destino}</strong>
         </div>
         <hr>
-        <p><strong><i class="fa-solid fa-clock"></i>  Saída: ${itinerario.saida}</strong></p>
-        <p><strong><i class="fa-solid fa-clock"></i>  Chegada prevista: ${itinerario.chegada}</strong></p>
+        <p><strong> Status:</strong> ${itinerario.status}</p>
+        <p><strong><i class="fa-solid fa-clock"></i>  Saída:</strong> ${itinerario.saida}</p>
+        <p><strong><i class="fa-solid fa-clock"></i>  Chegada prevista:</strong> ${itinerario.chegada}</p>
+        <p><strong><i class="fa-solid fa-clock-rotate-left"></i> Tolerância:</strong> ${itinerario.margemAtraso} minutos</p>
         <div class="botoesI">
             <button class='buscarPontos' data-itinerario-id='${itinerario.id}'>Buscar</button>
             <button class='excluirItinerario' data-itinerario-id='${itinerario.id}'>Exluir</button>
