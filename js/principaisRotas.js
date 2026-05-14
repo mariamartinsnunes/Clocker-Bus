@@ -11,7 +11,7 @@ function obterRotas() {
                 saida: "14:00", 
                 status: "No horário", 
                 lotacao: "Baixa",
-                pontos: ["Terminal Central", "Avenida Brasil, 200", "Shopping Plaza"],  
+                pontos: ["Terminal Central", "Avenida Brasil, 200", "Campus UNESP", "Shopping Plaza"],  
             },
 
             { id: 2, 
@@ -27,7 +27,7 @@ function obterRotas() {
                 saida: "14:10",
                 status: "Chegando", 
                 lotacao: "Baixa", 
-                pontos: ["UPA Norte", "Rua 15 de Novembro", "Praça da Matriz", "Centro"], 
+                pontos: ["UPA Norte", "Rua 15 de Novembro", "Praça da Matriz", "Centro", "UNIARA"], 
             },
 
             { id: 4, 
@@ -36,7 +36,7 @@ function obterRotas() {
                 status: "No horário", 
                 chegada: "15:10", 
                 lotacao: "Moderada",
-                pontos: ["Universidade Estadual", "Av. dos Estudantes", "Terminal Central"], 
+                pontos: ["UNIP", "Av. dos Estudantes", "IFSP", "Terminal Central"], 
             },
 
             { id: 5, 
@@ -52,7 +52,7 @@ function obterRotas() {
                 saida: "14:20", 
                 status: "No horário", 
                 lotacao: "Baixa",
-                pontos: ["Praça Central", "Avenida das Nações", "Terminal de Cargas", "Aeroporto"], 
+                pontos: ["Praça Central", "FATEC", "Avenida das Nações", "Terminal de Cargas", "Aeroporto"], 
             },
 
             { id: 7, 
@@ -60,7 +60,7 @@ function obterRotas() {
                 saida: "14:12",
                 status: "Chegando", 
                 lotacao: "Baixa", 
-                pontos: ["Terminal Leste", "Rua do Comércio", "Mercado Municipal"], 
+                pontos: ["Terminal Leste", "UNIARA", "Rua do Comércio", "Mercado Municipal"], 
             },
 
             { id: 8, 
@@ -68,7 +68,7 @@ function obterRotas() {
                 saida: "14:40",
                 status: "No horário", 
                 lotacao: "Alta",
-                pontos: ["Bairro Esperança", "Rua das Palmeiras", "Avenida da Paz", "Centro"], 
+                pontos: ["Bairro Esperança", "Campus UNESP", "Intituto de Química - UNESP", "Rua das Palmeiras", "Avenida da Paz", "Centro"], 
             },
 
             { id: 9, 
@@ -84,7 +84,7 @@ function obterRotas() {
                 saida: "14:00", 
                 status: "No horário", 
                 lotacao: "Moderada",
-                pontos: ["Terminal Central", "Rua 1", "Rua 2", "Rua 3", "Rua 4"], 
+                pontos: ["Terminal Central", "IFSP", "Rua 1", "Rua 2", "Rua 3", "Rua 4"], 
             }
 
         ];
@@ -94,19 +94,75 @@ function obterRotas() {
 }
 
 
+
 let mostrarTodasAsRotas = false;
+
+
+//mapea a opção selecionada
+function pontosUni(rota, filtroUni){
+    if(!filtroUni){
+        return true;
+    }
+
+    const mapeamentoOpcoes = {
+        "IFSP": ["ifsp", "instituto federal"],
+        "UNESP": ["unesp", "campus unesp", "instituto de química"],
+        "UNIARA": ["uniara", "universidade de araraquara"],
+        "UNIP": ["unip", "universidade paulista"],
+        "FATEC": ["fatec", "faculdade de tecnologia"]
+    };
+
+    const palavrasChave = mapeamentoOpcoes[filtroUni] || [];
+
+    return rota.pontos.some(ponto => palavrasChave.some(p => ponto.toLowerCase().includes(p)));
+}
+
+
+//função para aplicar o filtro e o texto digitado
+function aplicarInformacoes(){
+    const textoBusca = document.querySelector('.input-pill').value;
+
+    const uniSelecionada = document.querySelector('input[name="uni"]:checked')?.value;
+    const periodoSelecionado = document.querySelector('input[name="periodo"]:checked')?.value;
+
+    const rotas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
+
+
+    const rotasFiltradas = rotas.filter(rota => {
+        //verifica o texto digitado
+        const texto = (rota.linha + " " + rota.pontos.join(" ")).toLowerCase();
+        const matchTexto = (textoBusca === "" || texto.includes(textoBusca.toLowerCase().trim()));
+
+        //verifica os filtros
+        const matchUni = pontosUni(rota, uniSelecionada);
+
+        return matchTexto && matchUni;
+    });
+
+    carregarRotas(rotasFiltradas);
+}
+
+
 
 function carregarRotas(rotasFiltradas = null) {
     const containerRotas = document.getElementById('container-rotas');
     if(!containerRotas) return;
 
+
     const rotas = rotasFiltradas || obterRotas();
     containerRotas.innerHTML = '';
 
     if (rotas.length === 0) {
-        containerRotas.innerHTML = '<p style="text-align: center; color: var(--cor-texto-geral); padding: 20px;"><b>Nenhuma rota encontrada para estes locais.</b><br>Tente buscar por "Centro", "Terminal" ou "Shopping".</p>';
+        containerRotas.innerHTML = `
+            <p style="text-align: center; color: var(--cor-texto-geral); padding: 20px;">
+                <b>Nenhuma rota encontrada :(</b><br>
+                Tente buscar por "Centro", "Terminal" ou "Shopping".<br>
+                Ou selecione uma das opções do filtro.
+            </p>
+        `;
         return;
     }
+
 
     const estaPesquisando = rotasFiltradas !== null;
     let rotasExibidas = rotas;
@@ -114,6 +170,7 @@ function carregarRotas(rotasFiltradas = null) {
     if (!estaPesquisando && !mostrarTodasAsRotas) {
         rotasExibidas = rotas.slice(0, 4);
     }
+
 
     rotasExibidas.forEach(function(rota) {
         const card = document.createElement('div');
@@ -145,9 +202,11 @@ function carregarRotas(rotasFiltradas = null) {
         containerRotas.appendChild(card);
     });
 
+
+
     if (!estaPesquisando && !mostrarTodasAsRotas && rotas.length > 3) {
         const btnVerMais = document.createElement('button');
-        btnVerMais.className = 'button-buscar'; 
+        btnVerMais.className = 'botaoIndex'; 
         btnVerMais.style.margin = '20px auto';
         btnVerMais.style.display = 'block';
         btnVerMais.innerText = 'Ver Todas as Rotas';
@@ -160,9 +219,11 @@ function carregarRotas(rotasFiltradas = null) {
         containerRotas.appendChild(btnVerMais);
     }
 
+
+
     if (!estaPesquisando && mostrarTodasAsRotas && rotas.length > 3) {
         const btnVerMenos = document.createElement('button');
-        btnVerMenos.className = 'button-buscar';
+        btnVerMenos.className = 'botaoIndex';
         btnVerMenos.style.margin = '20px auto';
         btnVerMenos.style.display = 'block';
         btnVerMenos.style.backgroundColor = '#ccc'; //deixei cinza para diferenciar
@@ -179,81 +240,75 @@ function carregarRotas(rotasFiltradas = null) {
 }
 
 
-function buscarRotas(origem, destino) {
-    const rotas = obterRotas();
-    const termoOrigem = origem.toLowerCase().trim();
-    const termoDestino = destino.toLowerCase().trim();
-
-    const rotasEncontradas = rotas.filter(rota => {
-       
-        const textoRota = (rota.linha + " " + rota.pontos.join(" ")).toLowerCase();
-
-        const temOrigem = termoOrigem === "" || textoRota.includes(termoOrigem);
-        
-        const temDestino = termoDestino === "" || textoRota.includes(termoDestino);
-
-        return temOrigem && temDestino;
-    });
-
-    carregarRotas(rotasEncontradas);
-}
-
-const btnBuscarHome = document.querySelector('.button-buscar');
-if (btnBuscarHome) {
-    btnBuscarHome.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inputs = document.querySelectorAll('.input-pill');
-        const origem = inputs[0] ? inputs[0].value : "";
-        const destino = inputs[1] ? inputs[1].value : "";
-        buscarRotas(origem, destino);
-    });
-}
-
-
-const btnBuscarHist = document.querySelector('.btn-buscar-historico');
-if (btnBuscarHist) {
-    btnBuscarHist.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inputHist = document.querySelector('.input-historico');
-        const pesquisa = inputHist ? inputHist.value : "";
-
-        buscarRotas("", pesquisa);
-    });
-}
-
 
 function exibeInformacoesLinha(linha){
-    if(informacoesLinha){
-        const informacoesLinha = document.querySelector('#informacoesLinha');
-        const conteudoLinha = document.querySelector('#conteudoLinha');
-        conteudoLinha.innerHTML = '';
+    const conteudoLinha = document.querySelector('#conteudoLinha');
+    conteudoLinha.innerHTML = '';
 
-        if(linha){
-            conteudoLinha.innerHTML = `
-                <h6><strong><i class="fa-solid fa-bus"></i> ${linha.linha}</strong></h6>
-                <br>
-                <p><strong><i class="fa-solid fa-clock"></i> Previsão de saída:</strong> ${linha.saida}</p>
-                <p><strong><i class="fa-solid fa-tower-broadcast"></i> Pontualidade:</strong> ${linha.status}</p>
-                <p><strong>Rota (pontos de parada):</strong></p>
-            `;
-            const ul = document.createElement('ul');
-            linha.pontos.forEach(p => {
-                const li = document.createElement('li');
-                li.innerHTML = p;
-                ul.appendChild(li);
-            });
-            conteudoLinha.appendChild(ul);
-        } 
+    if(linha){
+        conteudoLinha.innerHTML = `
+            <h6><strong><i class="fa-solid fa-bus"></i> ${linha.linha}</strong></h6>
+            <br>
+            <p><strong><i class="fa-solid fa-clock"></i> Previsão de saída:</strong> ${linha.saida}</p>
+            <p><strong><i class="fa-solid fa-tower-broadcast"></i> Pontualidade:</strong> ${linha.status}</p>
+            <p><strong>Rota (pontos de parada):</strong></p>
+        `;
+
+        const ul = document.createElement('ul');
+
+        linha.pontos.forEach(p => {
+            const li = document.createElement('li');
+            li.innerHTML = p;
+            ul.appendChild(li);
+        });
+
+        conteudoLinha.appendChild(ul);
+    } 
+}
+
+
+
+//função para exibir o modal de filtros
+function modalFiltros(){
+    const modalFiltro = document.querySelector('#modalFiltrar');
+
+    if(modalFiltro){
+        const modalF = new bootstrap.Modal(modalFiltro);
+        modalF.show();
     }
 }
 
 
+//evento que chama o modal
+const botaoFiltro = document.querySelector(".button-filtrar");
+
+if(botaoFiltro){
+    botaoFiltro.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalFiltros();
+    });
+}
+
+
+//limpar filtros
+function limparFiltro(){
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => radio.checked = false);
+    
+    carregarRotas();
+}
+
+
+
+//para a aba histórico
 function atualizaHistorico(idRota){
     const usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
     const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {historicoLinhas: []};
 
+
     if(usuarioLogado && usuarioLogado.email){
         let index = usuariosCadastrados.findIndex(u => u.email === usuarioLogado.email);
+        
         if(index !== -1){
             if(!usuarioLogado.historicoLinhas) usuarioLogado.historicoLinhas = [];
             
@@ -261,8 +316,11 @@ function atualizaHistorico(idRota){
                 usuarioLogado.historicoLinhas = usuarioLogado.historicoLinhas.filter(id => id !== idRota);
                 usuariosCadastrados[index].historicoLinhas = usuariosCadastrados[index].historicoLinhas.filter(i => i !== idRota);
             }
+
+
             usuarioLogado.historicoLinhas.unshift(idRota);
             usuariosCadastrados[index].historicoLinhas.unshift(idRota);
+
             localStorage.setItem("usuarios", JSON.stringify(usuariosCadastrados));
             localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
         }
@@ -273,9 +331,11 @@ function atualizaHistorico(idRota){
 document.addEventListener('click', (e) => {
     if(e.target.classList.contains('card-link')){
         e.preventDefault();
+
         const info = e.target;
         const idRota = Number(info.dataset.rotaId);
         const rotaSalva = JSON.parse(localStorage.getItem('rotasClockerBus'));
+
         let linha = rotaSalva.find(r => r.id == idRota);
         
         if(linha){
@@ -285,21 +345,63 @@ document.addEventListener('click', (e) => {
                 modalLinha.show();
             }
         }
+
         atualizaHistorico(idRota);
     }
 });
 
+
+
+const btnBusca = document.querySelector('.button-buscar');
+
+if(btnBusca){
+    btnBusca.addEventListener('click', (e) => {
+        e.preventDefault();
+        aplicarInformacoes();
+
+        const inputTexto = document.querySelector('.input-pill');
+        if (inputTexto){
+            inputTexto.value = "";
+        }
+    });
+}
+
+
+const btnSalvarFiltros = document.querySelector('#salvarFiltro');
+
+if(btnSalvarFiltros){
+    btnSalvarFiltros.addEventListener('click', () => {
+        aplicarInformacoes();
+    });
+}
+
+
 carregarRotas();
 
 
+
+// const btnBuscarHist = document.querySelector('.btn-buscar-historico');
+
+// if (btnBuscarHist) {
+//     btnBuscarHist.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         const inputHist = document.querySelector('.input-historico');
+//         const pesquisa = inputHist ? inputHist.value : "";
+
+//         buscarRotas("", pesquisa);
+//     });
+// }
+
+
+
 // --------------------------------------------------------------------------------------
+
 
 // PARA OS TESTES USANDO JEST
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         obterRotas,
         carregarRotas,
-        buscarRotas,
         exibeInformacoesLinha,
         atualizaHistorico
     };

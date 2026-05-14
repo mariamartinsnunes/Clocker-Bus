@@ -102,7 +102,7 @@ function exibeHistorico(){
         });
 
     } else {
-        historico.innerHTML = '<p>Você ainda não acessou nenhuma linha!</p>';
+        historico.innerHTML = '<p class="info-aviso">Você ainda não acessou nenhuma linha!</p>';
     }
 }
 
