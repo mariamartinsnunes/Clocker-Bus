@@ -1,4 +1,26 @@
-//melhorar os feedbacks depois (todos os alerts)
+//para a visualização da senha
+function visualizarSenha(){
+    const iconesOlho = document.querySelectorAll('.olho-senha');
+
+    iconesOlho.forEach(olho => {
+        olho.addEventListener('click', function(){
+            const campoSenha = this.parentElement.querySelector('input');
+
+            if(campoSenha.type === 'password'){
+                campoSenha.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            
+            } else {
+                campoSenha.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    });
+}
+
+visualizarSenha();
 
 
 //cadastro 
@@ -45,7 +67,6 @@ function validacoes(){
 }
 
 
-
 function cadastroUsuario(){
     const nome = document.querySelector('#nome');
     const email = document.querySelector('#email'); 
@@ -70,12 +91,12 @@ function cadastroUsuario(){
 }
 
 
-
 const formulario = document.querySelector('#formulario');
 
 if(formulario){
     formulario.addEventListener('submit', function(e){
         e.preventDefault();
+
 
         if(validacoes()){
             let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -134,6 +155,7 @@ function validacaoLogin(){
 }
 
 
+
 const formLogin = document.querySelector('#formLogin');
 
 if(formLogin){
@@ -174,6 +196,7 @@ if(formLogin){
         }
     });
 }
+
 
 
 // --------------------------------------------------------------------------------------

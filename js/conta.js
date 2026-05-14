@@ -175,6 +175,32 @@ atualizaAvatar();
 
 
 
+//para a visualização da senha
+function visualizarSenha(){
+    const iconesOlho = document.querySelectorAll('.olho-senha');
+
+    iconesOlho.forEach(olho => {
+        olho.addEventListener('click', function(){
+            const campoSenha = this.parentElement.querySelector('input');
+
+            if(campoSenha.type === 'password'){
+                campoSenha.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            
+            } else {
+                campoSenha.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    });
+}
+
+visualizarSenha();
+
+
+
 //atualiza as informações (nome e/ou senha)
 function validacoes(nomePerfil, senhaAtual, novaSenha){
     const usuarioLogado = lerStorage("usuarioLogado");

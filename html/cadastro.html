@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Clocker Bus - Cadastro</title>
     <link rel="icon" type="image/png" href="../imagens/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/cssL.css">
 </head>
 <body>
@@ -35,7 +37,11 @@
                             <input id="nome" type="text" placeholder="Nome completo" minlength="5" pattern="^[A-Za-zÀ-ÿ\s']+$">
                             <!-- <input type="date" placeholder="Data de nascimento"> --> 
                             <input id="email" type="email" placeholder="E-mail" minlength="10">
-                            <input id="senha" type="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$">
+
+                            <div class="senha-container">
+                                <input id="senha" type="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$">
+                                <i class="fa-solid fa-eye olho-senha"></i>
+                            </div>
 
                             <button type="submit">Cadastrar</button>
                         </form>

@@ -146,12 +146,20 @@
 
                         <div class="campo">
                             <label for="senhaAtual">Senha atual:</label> <br>
-                            <input type="password" id="senhaAtual" placeholder="digite aqui"> <br>
+
+                            <div class="senha-container">
+                                <input type="password" id="senhaAtual" placeholder="digite aqui"> 
+                                <i class="fa-solid fa-eye olho-senha"></i>
+                            </div> <br>
                         </div>
 
                         <div class="campo">
                             <label for="senhaNova">Nova senha:</label> <br>
-                            <input type="password" id="senhaNova" placeholder="digite aqui" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$"> <br><br>
+
+                            <div class="senha-container">
+                                <input type="password" id="senhaNova" placeholder="digite aqui" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$"> 
+                                <i class="fa-solid fa-eye olho-senha"></i>
+                            </div> <br>
                         </div>
                     </div>
                 </div>
