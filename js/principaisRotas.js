@@ -118,15 +118,30 @@ function pontosUni(rota, filtroUni){
 }
 
 
+//para mostrar qual opção foi selecionada
+function mensagemFiltro(uniSelecionada){
+    const respostaFiltro = document.querySelector('#respostaFiltro');
+
+    if(respostaFiltro){
+        respostaFiltro.innerHTML = "";
+
+        if(uniSelecionada){
+            respostaFiltro.innerHTML = `Opção do filtro selecionada: <b>${uniSelecionada}</b>`;
+        } else {
+            respostaFiltro.innerHTML = "Nenhum filtro está sendo aplicado...";
+        }
+    }
+}
+
+
 //função para aplicar o filtro e o texto digitado
 function aplicarInformacoes(){
     const textoBusca = document.querySelector('.input-pill').value;
-
     const uniSelecionada = document.querySelector('input[name="uni"]:checked')?.value;
-    const periodoSelecionado = document.querySelector('input[name="periodo"]:checked')?.value;
+
+    mensagemFiltro(uniSelecionada);
 
     const rotas = JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
-
 
     const rotasFiltradas = rotas.filter(rota => {
         //verifica o texto digitado

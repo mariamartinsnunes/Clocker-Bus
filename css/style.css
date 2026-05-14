@@ -235,6 +235,12 @@ h5{
 }
 
 
+#respostaFiltro{
+    color: var(--cor-texto-geral);
+    padding: 15px;
+}
+
+
 
 /* CONTEÚDO PRINCIPAL */
 
