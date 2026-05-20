@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clocker Bus - Itinerários</title>
+    <title>ClockerBus - Gerenciar Rotas</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,134 +13,150 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-    <link rel="icon" type="image/png" href="../imagens/favicon.png">
+    <link rel="icon" type="image/png" href="./imagens/favicon.png">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/styleItinerarios.css">
-
-    <style>
-        main{
-            margin: 50px auto;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        h3{
-            color: #04191F;
-            text-align: center;
-        }
-
-        .tabelas table{
-            border-radius: 5px;
-        }
-
-        .tabelas th{
-            background-color: #34A0A4;
-            border-radius: 5px;
-            border: 3px solid #B6D6CC;
-
-            color: #04191F;
-            font-family: 'Cambria';
-            font-size: large;
-            text-align: center;
-
-            width: 200px;
-            height: 40px;
-        }
-    </style>
-    
 </head>
+
 <body>
-    <header>
+
+    <header class="header">
         <div class="logo">
             <i class="fa-solid fa-bus"></i>
             <span>CL<i class="fa-regular fa-clock" style="font-size: 20px;"></i>CKER BUS</span>
         </div>
         <nav>
-            <a href="../index.html">Página Inicial</a>
-            <a href="./itinerarios.html" class="ativo">Itinerários</a>
-            <a href="./historico.html">Histórico</a>
+            <a href="./gerenciarRotas.html" class="ativo">Gerenciar Rotas</a>
             <a href="#" id="btnMinhaConta">Minha Conta</a>
         </nav>
     </header>
-        
-    
-    <main>
-        <div>
-            <h3>Salve seus itinerários favoritos para acessar rapidamente quando precisar!</h3>
-        </div>
 
 
-        <div class="colunasTabelas">
+    <!-- ================= CONTEÚDO ================= -->
 
-            <section class="coluna-turno">
-                <h2 class="titulo-turno"><i class="fa-regular fa-sun"></i>  Manhã</h2>
-                <hr>
-                <div id="manha" class="cards"></div>
-                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
-            </section>
+    <main class="container-rotas">
 
+        <!-- TÍTULO -->
+        <section class="topo-rotas">
 
-            <section class="coluna-turno">
-                <h2 class="titulo-turno"><i class="fa-solid fa-cloud-sun"></i>  Tarde</h2>
-                <hr>
-                <div id="tarde" class="cards"></div>
-                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
-            </section>
+            <h1>
+                <i class="fa-solid fa-route"></i>
+                Gerenciar Rotas
+            </h1>
 
+            <button class="btn-nova-rota">
+                <i class="fa-solid fa-plus"></i>
+                Nova Rota
+            </button>
 
-            <section class="coluna-turno">
-                <h2 class="titulo-turno"><i class="fa-solid fa-moon"></i>  Noite</h2>
-                <hr>
-                <div id="noite" class="cards"></div>
-                <button class="button-add novoItinerario"><i class="fa-solid fa-plus"></i></button>
-            </section>
-
-        </div>
+        </section>
 
 
 
-        <div class="modal fade" id="pontosParada" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Pontos de parada do itinerário</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <ul id="listaPontos"></ul>
-                    </div>
+        <!-- ================= LISTA DE ROTAS ================= -->
+
+        <section class="lista-rotas">
+
+            <!-- ROTA 1 -->
+            <article class="card-rota-motorista">
+
+                <div class="info-rota">
+
+                    <h3>IFSP → Terminal Central</h3>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Saída: 06:30
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        12 paradas cadastradas
+                    </p>
+
+                    <span class="status ativo">
+                        ● Em operação
+                    </span>
+
                 </div>
-            </div>
-        </div>
+
+                <div class="acoes-rota">
+
+                    <button class="btn-acao iniciar">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+
+                    <button class="btn-acao editar">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+                    <button class="btn-acao pausar">
+                        <i class="fa-solid fa-pause"></i>
+                    </button>
+
+                    <button class="btn-acao excluir">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ROTA 2 -->
+            <article class="card-rota-motorista">
+
+                <div class="info-rota">
+
+                    <h3>Centro → Campus Universitário</h3>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Saída: 07:40
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                        8 paradas cadastradas
+                    </p>
+
+                    <span class="status pausado">
+                        ● Pausada
+                    </span>
+
+                </div>
+
+                <div class="acoes-rota">
+
+                    <button class="btn-acao iniciar">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+
+                    <button class="btn-acao editar">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+                    <button class="btn-acao excluir">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ROTA VAZIA (EXEMPLO) -->
+            <article class="card-vazio">
+
+                <i class="fa-solid fa-bus"></i>
+                <p>Nenhuma nova rota cadastrada.</p>
+
+            </article>
+
+        </section>
+
     </main>
-
-    
-    <!-- MODAL PARA ADICIONAR AS INFORMAÇÕES DO ITINERÁRIO -->
-
-    <div class="modal fade" id="modalItinerario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body" id="listaItinerarios">
-                    <h5>Adicionar Novo Itinerário</h5>
-
-                    <div id="cardsModal"></div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="botao botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="botao botaoSalvar" id="salvarItinerario" data-bs-dismiss="modal">Salvar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 
 
     <footer>
@@ -149,8 +164,10 @@
         <a href="#">Entre em Contato</a>
         <a href="#">Trabalhe Conosco</a>
         <a href="#">Política de Privacidade</a>
-        <a href="#">Investidores e Parceiro</a>
+        <a href="#">Investidores e Parceiros</a>
     </footer>
+
+
 
 
 
@@ -158,7 +175,7 @@
 
     <!-- OVERLAY -->
     <div id="overlay"></div>
-    
+
     <!-- SIDEBAR -->
     <div id="sidebarConta" class="sidebar-conta">
         <div class="sidebar-header">
@@ -186,6 +203,7 @@
         </div>
     </div>
 
+    
 
     <!-- EDITAR PERFIL -->
 
@@ -278,9 +296,10 @@
 
         }
     </script>
-    
+
+
+    <script src="../js/gerenciarRotas.js"></script>
     <script src="../js/conta.js"></script>
-    <script src="../js/itinerarios.js"></script>
 
 </body>
 </html>

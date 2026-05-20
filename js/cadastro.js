@@ -67,10 +67,11 @@ function validacoes(){
 }
 
 
-function cadastroUsuario(){
+function cadastroUsuario(tipoUsuario){
     const nome = document.querySelector('#nome');
     const email = document.querySelector('#email'); 
     const senha = document.querySelector('#senha');
+
 
     let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
@@ -78,6 +79,7 @@ function cadastroUsuario(){
         nome: nome.value.trim(),
         email: email.value.trim(),
         senha: senha.value.trim(),
+        tipoUser: tipoUsuario,
         avatar: '/imagens/avatares/avatar0.png',
         itinerariosSalvos: [],
         historicoLinhas: [],
@@ -116,15 +118,26 @@ if(formulario){
                 email.value = '';
                 senha.value = ''; 
             
-            } else {                   
-                cadastroUsuario();
-                alert('Cadastro realizado com sucesso!');
+            } else {       
+                const usuarioSelecionado = document.querySelector('input[name="tipoUser"]:checked')?.value;
 
-                nome.value = '';
-                email.value = '';
-                senha.value = '';
+                if(usuarioSelecionado){
+                    cadastroUsuario(usuarioSelecionado);
+                    alert('Cadastro realizado com sucesso!');
 
-                window.location.replace("../index.html");
+                    nome.value = '';
+                    email.value = '';
+                    senha.value = '';
+
+                    if(usuarioSelecionado == 'passageiro'){
+                        window.location.replace("../index.html");
+                    } else {
+                        window.location.replace("../html/gerenciarRotas.html");
+                    }
+
+                } else {
+                    alert("Escolha uma opção de usuário para continuar o cadastro");
+                }
             }
         }
     });
@@ -170,6 +183,7 @@ if(formLogin){
             
             let cadastroExiste = false;
             let usuarioLogado = null;
+            let tipoUsuario = null;
 
             for(let i = 0; i < usuariosCadastrados.length; i++){
                 let usuario = usuariosCadastrados[i];
@@ -177,6 +191,7 @@ if(formLogin){
                 if(emailLogin.value.trim() == usuario.email.trim() && senhaLogin.value.trim() == usuario.senha.trim()){
                     cadastroExiste = true;
                     usuarioLogado = usuario;
+                    tipoUsuario = usuario.tipoUser;
                     break;
                 }
             }
@@ -185,7 +200,12 @@ if(formLogin){
             if(cadastroExiste){
                 alert('Entrando...');
                 localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-                window.location.replace("../index.html");
+
+                if(tipoUsuario == 'passageiro'){
+                        window.location.replace("../index.html");
+                    } else {
+                        window.location.replace("../html/gerenciarRotas.html");
+                    }
             
             } else {
                 alert('Usuário e/ou senha incorreto(s)');

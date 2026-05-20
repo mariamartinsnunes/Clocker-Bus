@@ -34,13 +34,28 @@
 
                     <div class="form-box">
                         <form id="formulario" novalidate>
-                            <input id="nome" type="text" placeholder="Nome completo" minlength="5" pattern="^[A-Za-zÀ-ÿ\s']+$">
-                            <!-- <input type="date" placeholder="Data de nascimento"> --> 
+                            <input id="nome" type="text" placeholder="Nome completo" minlength="3" pattern="^[A-Za-zÀ-ÿ\s']+$">
+
                             <input id="email" type="email" placeholder="E-mail" minlength="10">
 
                             <div class="senha-container">
                                 <input id="senha" type="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$">
                                 <i class="fa-solid fa-eye olho-senha"></i>
+                            </div>
+
+                            
+                            <label class="pergunta" for="tipoUser">Tipo de usuário</label>
+
+                            <div class="opcoesUsusario" id="tipoUser">
+                                <label for="passageiro" class="itemUser">
+                                    <input type="radio" id="passageiro" name="tipoUser" value="passageiro">
+                                    <span>Passageiro</span>
+                                </label>
+
+                                <label for="motorista" class="itemUser">
+                                    <input type="radio" id="motorista" name="tipoUser" value="motorista">
+                                    <span>Motorista</span>
+                                </label>
                             </div>
 
                             <button type="submit">Cadastrar</button>

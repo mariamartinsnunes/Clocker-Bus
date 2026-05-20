@@ -169,12 +169,6 @@ h5{
     gap: 10px;
 }
 
-#periodo{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
 .item-radio{
     display: flex;
     gap: 10px;
@@ -629,7 +623,7 @@ input::-ms-clear {
 }
 
 .olho-senha{
-    position: absolute;
+    position: absolute; 
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
