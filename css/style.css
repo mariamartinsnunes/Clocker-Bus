@@ -345,26 +345,15 @@ main {
 
 /*MAPA PRINCIPAL*/
 
-.mapa-container {
-    flex: 1;
-    background-color: #ddd;
-    background-image: url('https://via.placeholder.com/600x400?text=Mapa+Principal');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    min-height: 300px;
-    border: 5px solid rgba(255,255,255,0.3);
-}
-
 #mapa{
     margin: 50px auto;
 }
 
-.pino-mapa {
-    position: absolute;
-    color: #ff3b3b;
-    font-size: 40px;
-    filter: drop-shadow(0px 4px 2px rgba(0,0,0,0.4));
+#mapa #mapa-uber{
+    height: 550px; 
+    border-radius: 8px; 
+    border: 2px solid var(--cor-detalhes); 
+    z-index: 1;
 }
 
 

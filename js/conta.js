@@ -1,6 +1,3 @@
-//melhorar os feedbacks depois (todos os alerts)
-
-
 //lista de avatares disponíveis
 const avatares = [
     '/imagens/avatares/avatar0.png',

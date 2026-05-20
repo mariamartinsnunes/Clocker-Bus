@@ -2,7 +2,6 @@
 const containerLista = document.querySelector('.lista-rotas');
 const btnNovaRota = document.querySelector('.btn-nova-rota');
 
-
 function obterRotas() {
     return JSON.parse(localStorage.getItem('rotasClockerBus')) || [];
 }
@@ -28,7 +27,6 @@ function renderizarRotas() {
     }
 
     rotas.forEach(rota => {
-
         const statusAtual = rota.status || 'Em operação';
         const classeStatus = statusAtual === 'Pausada' ? 'pausado' : 'ativo';
         const qtdParadas = rota.pontos ? rota.pontos.length : 0;
@@ -98,6 +96,7 @@ window.editarRota = function(id) {
     }
 };
 let idRastreamentoMotorista = null;
+let socketMotorista = null;
 
 window.alterarStatusRota = function(id, novoStatus) {
     const rotas = obterRotas();
@@ -111,13 +110,21 @@ window.alterarStatusRota = function(id, novoStatus) {
         if (novoStatus === 'Em operação') {
             alert("Viagem iniciada! Transmitindo seu GPS para os passageiros...");
             
+            if (!socketMotorista) {
+                socketMotorista = io('https://projeto-clocker-bus.onrender.com'); 
+            }
+            
             if ('geolocation' in navigator) {
                 idRastreamentoMotorista = navigator.geolocation.watchPosition(function(posicao) {
                     const gpsData = {
+                        linha: rotas[index].linha,
                         lat: posicao.coords.latitude,
                         lng: posicao.coords.longitude
                     };
-                    localStorage.setItem('gps_onibus_simulado', JSON.stringify(gpsData));
+
+                   
+                    socketMotorista.emit('enviar_gps', gpsData);
+        
                 }, function(erro) {
                     console.log("Erro no GPS do Motorista", erro);
                     alert("Por favor, ative a localização do seu dispositivo para iniciar a rota.");
@@ -127,12 +134,12 @@ window.alterarStatusRota = function(id, novoStatus) {
         } else if (novoStatus === 'Pausada') {
             if (idRastreamentoMotorista) {
                 navigator.geolocation.clearWatch(idRastreamentoMotorista);
-                localStorage.removeItem('gps_onibus_simulado');
                 alert("Viagem pausada. Transmissão de GPS interrompida.");
             }
         }
     }
 };
+
 
 if (btnNovaRota) {
     btnNovaRota.addEventListener('click', () => {
@@ -143,7 +150,6 @@ if (btnNovaRota) {
 
         let rotas = obterRotas();
         
-        // Cria a nova rota com os dados essenciais
         const novaRota = {
             id: rotas.length > 0 ? Math.max(...rotas.map(r => r.id)) + 1 : 1,
             linha: nomeDaLinha.trim(),
