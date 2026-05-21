@@ -1,0 +1,33 @@
+.espaco{
+    margin-top: 30px;
+}
+
+.funcaoConfig{
+    margin-left: 20px;
+}
+
+.funcaoConfig p{
+    color: rgb(75, 74, 74);
+}
+
+.icones{
+    display: flex;
+    gap: 15px;
+}
+
+.funcaoConfig i{
+    font-size: 30px;
+}
+
+.funcaoConfig button{
+    border: 3px solid gray;
+    border-radius: 20px;
+    color: gray;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.botao{
+    background-color: gray;
+}

@@ -15,6 +15,7 @@
     
     <link rel="icon" type="image/png" href="./imagens/favicon.png">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/styleConfiguracao.css">
     <style>
         #rotas{
             margin: auto;
@@ -162,6 +163,8 @@
         <a href="#">Investidores e Parceiros</a>
     </footer>
 
+
+
     <div id="overlay"></div>
 
     <div id="sidebarConta" class="sidebar-conta">
@@ -189,6 +192,8 @@
             </ul>
         </div>
     </div>
+
+
 
     <div class="modal fade modalPerfil" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -252,6 +257,43 @@
     </div>
 
 
+    <div class="modal fade modalConfiguracao" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Configurações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="funcaoConfig">
+                        <p><b>Contraste:</b></p>
+
+                        <div class="icones">
+                            <i id="modoClaro" class="fa-solid fa-sun"></i>
+                            <i id="modoEscuro" class="fa-solid fa-moon"></i>
+                        </div>
+                    </div>
+
+                    <div class="funcaoConfig espaco">
+                        <p><b>Tamanho da fonte:</b></p>
+                        
+                        <button id="btnAumentarFonte"><b>A+</b></button>
+                        <button id="btnDiminuirFonte"><b>A-</b></button>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="botao" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
     <script>
         window.onload = function() {
 
@@ -286,7 +328,8 @@
 
     <script src="./js/conta.js"></script>
     <script src="./js/principaisRotas.js"></script>
-    <script type="module" src="js/menu.js"></script>
+    <script src="./js/configuracao.js"></script>
 
+    <script type="module" src="js/menu.js"></script>
 </body>
 </html>
