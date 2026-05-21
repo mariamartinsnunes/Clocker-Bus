@@ -92,6 +92,37 @@
 
     <!--Minha Conta-->
 
+    <div id="modal-feedback-overlay" class="modal-feedback-overlay">
+        <div class="modal-feedback-box">
+            <div id="modal-feedback-msg"></div>
+            <button id="modal-feedback-fechar">Fechar</button>
+        </div>
+    </div>
+
+        <!-- Modal de CONFIRMAÇÃO (substitui confirm()) -->
+    <div id="modal-confirm-overlay" class="modal-feedback-overlay">
+        <div class="modal-feedback-box">
+            <div id="modal-confirm-msg"></div>
+            <div class="modal-confirm-botoes">
+                <button id="modal-confirm-ok">Confirmar</button>
+                <button id="modal-confirm-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de ENTRADA (substitui prompt()) -->
+    <div id="modal-prompt-overlay" class="modal-feedback-overlay">
+        <div class="modal-feedback-box">
+            <div id="modal-prompt-msg"></div>
+            <input type="text" id="modal-prompt-input" class="modal-prompt-input">
+            <div class="modal-confirm-botoes">
+                <button id="modal-prompt-ok">Confirmar</button>
+                <button id="modal-prompt-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+ 
+
     <!-- OVERLAY -->
     <div id="overlay"></div>
 

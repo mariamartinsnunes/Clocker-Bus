@@ -437,7 +437,53 @@ footer a {
     /*background: #64B6AC;*/
     margin: 0 auto 12px auto;
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
 
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.modal-box {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 35px 30px 25px;
+    width: 320px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#modal-mensagem {
+    color: #04191f;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+#modal-fechar {
+    padding: 10px 30px;
+    background: #34A0A4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#modal-fechar:hover {
+    background: #64B6AC;
+}
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -650,7 +696,6 @@ input::-ms-clear {
 }
 
 
-
 /* AVISOS */
 
 .toast-dev {
@@ -702,4 +747,54 @@ input::-ms-clear {
 
 .btn-click:hover {
     opacity: 0.7;
+}
+
+
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.modal-box {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 35px 30px 25px;
+    width: 320px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#modal-mensagem {
+    color: #04191f;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+#modal-fechar {
+    padding: 10px 30px;
+    background: #34A0A4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#modal-fechar:hover {
+    background: #64B6AC;
 }

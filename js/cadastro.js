@@ -1,3 +1,27 @@
+function showModal(mensagem, callback) {
+    const overlay = document.querySelector('#modal-overlay');
+    const texto   = document.querySelector('#modal-mensagem');
+    const botao   = document.querySelector('#modal-fechar');
+
+    if (!overlay || !texto || !botao) {
+        return;
+    }
+
+    texto.textContent = mensagem;
+    overlay.classList.add('ativo');
+
+    // remove listener anterior para não acumular
+    const novo = botao.cloneNode(true);
+    botao.parentNode.replaceChild(novo, botao);
+
+    novo.addEventListener('click', function () {
+        overlay.classList.remove('ativo');
+        if (typeof callback === 'function') callback();
+    });
+}
+
+
+
 //para a visualização da senha
 function visualizarSenha(){
     const iconesOlho = document.querySelectorAll('.olho-senha');
@@ -30,36 +54,38 @@ function validacoes(){
     const email = document.querySelector('#email'); 
     const senha = document.querySelector('#senha');
 
-    if(nome.value.length == 0){
-        alert('O nome é obrigatório');
-        return false;
-    }
-    if(nome.value.length < 5){
-        alert('Nome deve ter pelo menos 5 caracteres');
-        return false;
-    } 
-    if(nome.validity.patternMismatch){
-        alert('Use apenas letras maiusculas ou minusculas no campo nome');
+    if (nome.value.length == 0) {
+        showModal('O nome é obrigatório');
         return false;
     }
 
-
-    if(email.value.length == 0){
-        alert('Informe a o email para realizar o cadastro');
+    if (nome.value.length < 5) {
+        showModal('Nome deve ter pelo menos 5 caracteres');
         return false;
     }
-    if(email.validity.patternMismatch){
-        alert('Campo email incorreto!'); 
-        return false;
-    } 
 
-
-    if(senha.value.length == 0){
-        alert('Informe a senha para o cadastro');
+    if (nome.validity.patternMismatch) {
+        showModal('Use apenas letras maiúsculas ou minúsculas no campo nome');
         return false;
-    } 
-    if(senha.validity.patternMismatch){
-        alert('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.'); 
+    }
+ 
+    if (email.value.length == 0) {
+        showModal('Informe o email para realizar o cadastro');
+        return false;
+    }
+
+    if (email.validity.patternMismatch) {
+        showModal('Campo email incorreto!');
+        return false;
+    }
+ 
+    if (senha.value.length == 0) {
+        showModal('Informe a senha para o cadastro');
+        return false;
+    }
+
+    if (senha.validity.patternMismatch) {
+        showModal('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.');
         return false;
     }
 
@@ -99,6 +125,10 @@ if(formulario){
     formulario.addEventListener('submit', function(e){
         e.preventDefault();
 
+        const nome = document.querySelector('#nome');
+        const email = document.querySelector('#email');
+        const senha = document.querySelector('#senha');
+
 
         if(validacoes()){
             let usuariosCadastrados = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -112,8 +142,8 @@ if(formulario){
 
         
             if(emailExiste){
-                alert('Não foi possível realizar o cadastro, pois este email já está cadastrado!');
-
+                showModal('Não foi possível realizar o cadastro, pois este email já está cadastrado!');
+                
                 nome.value = '';
                 email.value = '';
                 senha.value = ''; 
@@ -123,20 +153,21 @@ if(formulario){
 
                 if(usuarioSelecionado){
                     cadastroUsuario(usuarioSelecionado);
-                    alert('Cadastro realizado com sucesso!');
 
                     nome.value = '';
                     email.value = '';
                     senha.value = '';
 
-                    if(usuarioSelecionado == 'passageiro'){
-                        window.location.replace("../index.html");
-                    } else {
-                        window.location.replace("../html/gerenciarRotas.html");
-                    }
+                    showModal('Cadastro realizado com sucesso!', function () {
+                        if(usuarioSelecionado == 'passageiro'){
+                            window.location.replace("../index.html");
+                        } else {
+                            window.location.replace("../html/gerenciarRotas.html");
+                        }
+                    });
 
                 } else {
-                    alert("Escolha uma opção de usuário para continuar o cadastro");
+                    showModal('Escolha uma opção de usuário para continuar o cadastro');
                 }
             }
         }
@@ -155,12 +186,12 @@ function validacaoLogin(){
 
 
     if(emailLogin.value.length == 0){
-        alert('Informe o email para o login');
+        showModal('Informe o email para o login');
         return false;
     }
 
     if(senhaLogin.value.length == 0){
-        alert('Informe a senha para o login');
+        showModal('Informe a senha para o login');
         return false;
     }
 
@@ -198,17 +229,18 @@ if(formLogin){
 
             
             if(cadastroExiste){
-                alert('Entrando...');
                 localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
-
-                if(tipoUsuario == 'passageiro'){
+                
+                showModal('Entrando...', function () {
+                    if (tipoUsuario == 'passageiro') {
                         window.location.replace("../index.html");
                     } else {
                         window.location.replace("../html/gerenciarRotas.html");
                     }
-            
+                });
+        
             } else {
-                alert('Usuário e/ou senha incorreto(s)');
+                showModal('Usuário e/ou senha incorreto(s)');
 
                 emailLogin.value = '';
                 senhaLogin.value = '';
@@ -222,7 +254,10 @@ if(formLogin){
 // --------------------------------------------------------------------------------------
 
 // PARA OS TESTES USANDO JEST
-
-if (typeof module !== 'undefined') {
-    module.exports = { validacoes };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        validacoes,
+        visualizarSenha,
+        showModal
+    };
 }

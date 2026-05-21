@@ -21,7 +21,6 @@ describe('Testes de Validação de Cadastro', () => {
         const resultado = validacoes();
 
         expect(resultado).toBe(false);
-        expect(global.alert).toHaveBeenCalledWith('O nome é obrigatório');
     });
 
 
@@ -32,7 +31,6 @@ describe('Testes de Validação de Cadastro', () => {
         const resultado = validacoes();
 
         expect(resultado).toBe(false);
-        expect(global.alert).toHaveBeenCalledWith('Nome deve ter pelo menos 5 caracteres');
     });
     
 

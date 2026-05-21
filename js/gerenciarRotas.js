@@ -1,3 +1,22 @@
+function showModal(mensagem, callback) {
+    const overlay = document.querySelector('#modal-feedback-overlay');
+    const texto   = document.querySelector('#modal-feedback-msg');
+    const botao   = document.querySelector('#modal-feedback-fechar');
+
+    texto.textContent = mensagem;
+    overlay.classList.add('ativo');
+
+    const novo = botao.cloneNode(true);
+    botao.parentNode.replaceChild(novo, botao);
+
+    novo.addEventListener('click', function () {
+        overlay.classList.remove('ativo');
+        if (typeof callback === 'function') callback();
+    });
+}
+
+
+
 // Selecionando os elementos principais do HTML
 const containerLista = document.querySelector('.lista-rotas');
 const btnNovaRota = document.querySelector('.btn-nova-rota');

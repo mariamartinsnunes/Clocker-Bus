@@ -309,4 +309,9 @@ if(sair){
 // --------------------------------------------------------------------------------------
 
 // PARA OS TESTES USANDO JEST
-module.exports = { validacoes }; 
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        validacoes,
+        visualizarSenha,
+    };
+}
