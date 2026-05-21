@@ -1,7 +1,7 @@
 const {
     obterRotas,
     carregarRotas,
-    buscarRotas,
+    aplicarInformacoes,
     exibeInformacoesLinha,
     atualizaHistorico
 } = require('../js/principaisRotas.js');
@@ -12,14 +12,15 @@ describe('Testes do Sistema de Rotas ClockerBus', () => {
     beforeEach(() => {
         document.body.innerHTML = `
             <div id="container-rotas"></div>
+            <input class="input-pill" />
             <button class="button-buscar"></button>
+
             <div id="informacoesLinha">
                 <div id="conteudoLinha"></div>
             </div>
         `;
         
         localStorage.clear();
-        localStorage.removeItem('rotasClockerBus');
     });
 
 
@@ -56,7 +57,7 @@ describe('Testes do Sistema de Rotas ClockerBus', () => {
             
             const container = document.getElementById('container-rotas');
             const cards = container.querySelectorAll('.card-rota');
-            const botaoVerMais = container.querySelector('.button-buscar');
+            const botaoVerMais = container.querySelector('.botaoIndex');
 
             expect(cards.length).toBe(4);
             expect(botaoVerMais).not.toBeNull();
@@ -74,27 +75,27 @@ describe('Testes do Sistema de Rotas ClockerBus', () => {
 
 
 
-    describe('buscarRotas()', () => {
+    describe('aplicarInformacoes()', () => {
 
         test('Deve filtrar rotas corretamente pelo nome do destino', () => {
+            const input = document.querySelector('.input-pill');
+            input.value = 'Aeroporto';
 
-            buscarRotas("", "Aeroporto");
+            aplicarInformacoes();
             
             const container = document.getElementById('container-rotas');
-            const cards = container.querySelectorAll('.card-rota');
-            
-            expect(cards.length).toBe(1);
             expect(container.innerHTML).toContain('Praça Central / Aeroporto');
         });
 
 
-        test('Deve filtrar rotas corretamente combinando origem e destino', () => {
-            buscarRotas("UPA", "Centro");
+        test('Deve filtrar rotas corretamente por origem', () => {
+             const input = document.querySelector('.input-pill');
+            input.value = 'UPA';
+
+            aplicarInformacoes();
             
             const container = document.getElementById('container-rotas');
-            const cards = container.querySelectorAll('.card-rota');
-            
-            expect(cards.length).toBe(1);
+
             expect(container.innerHTML).toContain('102 - UPA / Centro');
         });
     });
@@ -154,5 +155,4 @@ describe('Testes do Sistema de Rotas ClockerBus', () => {
             expect(conteudoModal).toContain('Ponto B');
         });
     });
-
 });

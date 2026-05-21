@@ -452,4 +452,4 @@ document.addEventListener('click', (event) => {
 // --------------------------------------------------------------------------------------
 
 // PARA OS TESTES USANDO JEST
-//module.exports = {itinerariosValidos, periodo, tabelaManha, tabelaTarde, tabelaNoite};
+module.exports = {periodo};
