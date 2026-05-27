@@ -1,77 +1,140 @@
-const { visualizarSenha } = require('../js/cadastro.js');
+const { validacoes, validacaoLogin } = require('../js/cadastro.js');
 
-describe('Testes de visualizarSenha', () => {
+
+describe('Testes de validacoes() de Cadastro', () => {
+    
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <input id="nome" />
+            <input id="email" />
+            <input id="senha" />
+        `;
+    })
+
+
+    test('Campo nome vazio', () => {
+        const nomeInput = document.querySelector('#nome');
+        nomeInput.value = '';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+
+
+    test('Nome menor que 3 caracteres', () => {
+        const nomeInput = document.querySelector('#nome');
+        nomeInput.value = 'AB';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+    
+    
+    test('Números no campo nome', () => {
+        const nomeInput = document.querySelector('#nome');
+        nomeInput.value = '123';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+
+    
+    test('Campo email vazio', () => {
+        const emailInput = document.querySelector('#email');
+        emailInput.value = '';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+
+    
+    test('Email fora do padrão', () => {
+        const emailInput = document.querySelector('#email');
+        emailInput.value = 'ana123';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+
+
+    test('Campo senha vazio', () => {
+        const senhaInput = document.querySelector('#senha');
+        senhaInput.value = '';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+    
+
+    test('Senha fora do padrão', () => {
+        const senhaInput = document.querySelector('#senha');
+        senhaInput.value = 'abc123';
+
+        const resultado = validacoes();
+
+        expect(resultado).toBe(false);
+    });
+    
+
+    test('Campos preenchidos corretamente', () => {
+        const nomeInput = document.querySelector('#nome');
+        nomeInput.value = 'Ana Carolina Souza';
+
+        const emailInput = document.querySelector('#email');
+        emailInput.value = 'anaCarol@gmail.com';
+
+        const senhaInput = document.querySelector('#senha');
+        senhaInput.value = 'AnaC@123';
+
+        const resultado = validacoes();
+        expect(resultado).toBe(true);
+    });
+});
+
+
+
+describe('Testes de validacaoLogin() de Cadastro', () => {
 
     beforeEach(() => {
         document.body.innerHTML = `
-            <div class="campo-senha">
-                <input type="password" id="senha" />
-                <i class="olho-senha fa fa-eye"></i>
-            </div>
-            <div class="campo-senha">
-                <input type="password" id="confirmarSenha" />
-                <i class="olho-senha fa fa-eye"></i>
-            </div>
+            <input id="emailLogin" />
+            <input id="senhaLogin" />
         `;
-        visualizarSenha();
+    })
+
+
+    test('Campo email vazio', () => {
+        const emailLogin = document.querySelector('#emailLogin');
+        emailLogin.value = ' ';
+
+        const resultadoLogin = validacaoLogin();
+        expect(resultadoLogin).toBe(false);
     });
 
-    test('deve trocar o tipo do input de "password" para "text" ao clicar no ícone', () => {
-        const olho = document.querySelector('.olho-senha');
-        const campoSenha = olho.parentElement.querySelector('input');
 
-        expect(campoSenha.type).toBe('password');
+    test('Campo senha vazio', () => {
+        const senhaLogin = document.querySelector('#senhaLogin');
+        senhaLogin.value = ' ';
 
-        olho.click();
-
-        expect(campoSenha.type).toBe('text');
+        const resultadoLogin = validacaoLogin();
+        expect(resultadoLogin).toBe(false);
     });
 
-    test('deve trocar o tipo do input de "text" de volta para "password" ao clicar novamente', () => {
-        const olho = document.querySelector('.olho-senha');
-        const campoSenha = olho.parentElement.querySelector('input');
 
-        olho.click(); // password → text
-        olho.click(); // text → password
+    test('Campos para o login preenchidos', () => {
+        const emailLogin = document.querySelector('#emailLogin');
+        emailLogin.value = 'joao.com';
 
-        expect(campoSenha.type).toBe('password');
-    });
+        const senhaLogin = document.querySelector('#senhaLogin');
+        senhaLogin.value = 'Joao123';
 
-    test('deve remover a classe "fa-eye" e adicionar "fa-eye-slash" ao mostrar a senha', () => {
-        const olho = document.querySelector('.olho-senha');
-
-        expect(olho.classList.contains('fa-eye')).toBe(true);
-        expect(olho.classList.contains('fa-eye-slash')).toBe(false);
-
-        olho.click();
-
-        expect(olho.classList.contains('fa-eye')).toBe(false);
-        expect(olho.classList.contains('fa-eye-slash')).toBe(true);
-    });
-
-    test('deve remover a classe "fa-eye-slash" e adicionar "fa-eye" ao ocultar a senha', () => {
-        const olho = document.querySelector('.olho-senha');
-
-        olho.click(); // mostra → fa-eye-slash
-        olho.click(); // oculta → fa-eye
-
-        expect(olho.classList.contains('fa-eye-slash')).toBe(false);
-        expect(olho.classList.contains('fa-eye')).toBe(true);
-    });
-
-    test('deve funcionar independentemente para cada campo de senha', () => {
-        const olhos = document.querySelectorAll('.olho-senha');
-        const primeiroInput = olhos[0].parentElement.querySelector('input');
-        const segundoInput = olhos[1].parentElement.querySelector('input');
-
-        olhos[0].click(); // só o primeiro
-
-        expect(primeiroInput.type).toBe('text');
-        expect(segundoInput.type).toBe('password'); // segundo não muda
-    });
-
-    test('não deve quebrar se não houver elementos ".olho-senha" na página', () => {
-        document.body.innerHTML = ''; // página sem nenhum ícone
-        expect(() => visualizarSenha()).not.toThrow();
+        const resultadoLogin = validacaoLogin();
+        expect(resultadoLogin).toBe(true);
     });
 });

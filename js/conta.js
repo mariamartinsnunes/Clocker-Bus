@@ -199,44 +199,44 @@ visualizarSenha();
 
 
 //atualiza as informações (nome e/ou senha)
-function validacoes(nomePerfil, senhaAtual, novaSenha){
-    const usuarioLogado = lerStorage("usuarioLogado");
+function validacoes(nomePerfil, senhaAtual, novaSenha){  //1
+    const usuarioLogado = lerStorage("usuarioLogado");  //1
 
-    let senhaNova = '';
-    let novoNome = '';
+    let senhaNova = '';  //1
+    let novoNome = '';  //1
 
-    if(nomePerfil.value.trim() != ''){
+    if(nomePerfil.value.trim() != ''){  //2
 
-        if(nomePerfil.validity.patternMismatch){
-            alert('Use apenas letras maiusculas ou minusculas no campo nome');
-            return false;
+        if(nomePerfil.validity.patternMismatch){  //3
+            //alert('Use apenas letras maiusculas ou minusculas no campo nome');  //4
+            return false;  //4
         } 
         
-        novoNome = nomePerfil.value.trim();
-    }
+        //seria um else
+        novoNome = nomePerfil.value.trim();  //5
+    }  //2
     
 
-    if(senhaAtual.value || novaSenha.value){
-        if(!senhaAtual.value || !novaSenha.value){
-            alert('Preencha todos os campos de senha!');
-            return false;
+    if(senhaAtual.value || novaSenha.value){  //6
+        if(!senhaAtual.value || !novaSenha.value){  //7  
+            //alert('Preencha todos os campos de senha!');  //8
+            return false;  //8
+        }
+        else if(senhaAtual.value !== usuarioLogado.senha){  //else é 9 e if é 10
+            //alert('Senha atual incorreta!');  //11
+            return false;  //11
+        }
+        else if(novaSenha.validity.patternMismatch){  //else é 12 e if é 13
+            //alert('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.');  //14
+            return false;  //14
         }
 
-        if(senhaAtual.value !== usuarioLogado.senha){
-            alert('Senha atual incorreta!');
-            return false;
-        }
+        senhaNova = novaSenha.value.trim();  //15
+    }  //6
 
-        if(novaSenha.validity.patternMismatch){
-            alert('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.'); 
-            return false;
-        }
+    return {senhaNova, novoNome};  //16
+}  //1
 
-        senhaNova = novaSenha.value.trim(); 
-    }
-
-    return {senhaNova, novoNome};
-}
 
 
 //salva as alterações

@@ -49,48 +49,42 @@ visualizarSenha();
 
 //cadastro 
 
-function validacoes(){
-    const nome = document.querySelector('#nome');
-    const email = document.querySelector('#email'); 
-    const senha = document.querySelector('#senha');
+function validacoes(){  //1
+    const nome = document.querySelector('#nome');  //1
+    const email = document.querySelector('#email');  //1
+    const senha = document.querySelector('#senha');  //1
 
-    if (nome.value.length == 0) {
-        showModal('O nome é obrigatório');
-        return false;
+    if (nome.value.length == 0) {  //2
+        showModal('O nome é obrigatório');  //3
+        return false;  //3
     }
+    else if (nome.value.length < 3) {  //else é 4 e if 5
+        showModal('Nome deve ter pelo menos 3 caracteres');  //6
+        return false;  //6
+    }
+    else if (nome.validity.patternMismatch) {  //else é 7 e if é 8
+        showModal('Use apenas letras maiúsculas ou minúsculas no campo nome');  //9
+        return false;  //9
+    }
+    else if (email.value.length == 0) {  //else é 10 e if 11
+        showModal('Informe o email para realizar o cadastro');  //12
+        return false;  //12
+    }
+    else if (email.validity.patternMismatch) {  //else é 13 e if 14
+        showModal('Campo email incorreto!');  //15
+        return false;  //15
+    }
+    else if (senha.value.length == 0) {  //else é 16 e if 17
+        showModal('Informe a senha para o cadastro');  //18
+        return false;  //18
+    }
+    else if (senha.validity.patternMismatch) {  //else é 19 e if é 20
+        showModal('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.');  //21
+        return false;  //21
+    } 
 
-    if (nome.value.length < 5) {
-        showModal('Nome deve ter pelo menos 5 caracteres');
-        return false;
-    }
-
-    if (nome.validity.patternMismatch) {
-        showModal('Use apenas letras maiúsculas ou minúsculas no campo nome');
-        return false;
-    }
- 
-    if (email.value.length == 0) {
-        showModal('Informe o email para realizar o cadastro');
-        return false;
-    }
-
-    if (email.validity.patternMismatch) {
-        showModal('Campo email incorreto!');
-        return false;
-    }
- 
-    if (senha.value.length == 0) {
-        showModal('Informe a senha para o cadastro');
-        return false;
-    }
-
-    if (senha.validity.patternMismatch) {
-        showModal('A senha deve ter pelo menos 8 caracteres, incluindo maiúscula, número e símbolo.');
-        return false;
-    }
-
-    return true;
-}
+    return true;  //22
+}  //1
 
 
 function cadastroUsuario(tipoUsuario){
@@ -180,23 +174,22 @@ if(formulario){
 
 //login
 
-function validacaoLogin(){
-    const emailLogin = document.querySelector('#emailLogin');
-    const senhaLogin = document.querySelector('#senhaLogin');
+function validacaoLogin(){  //1
+    const emailLogin = document.querySelector('#emailLogin');  //1
+    const senhaLogin = document.querySelector('#senhaLogin');  //1
 
 
-    if(emailLogin.value.length == 0){
-        showModal('Informe o email para o login');
-        return false;
+    if(emailLogin.value.length == 0){  //2
+        showModal('Informe o email para o login'); //3
+        return false;  //3
+    }
+    else if(senhaLogin.value.length == 0){  //else é 4 e if é 5
+        showModal('Informe a senha para o login');  //6
+        return false;  //6
     }
 
-    if(senhaLogin.value.length == 0){
-        showModal('Informe a senha para o login');
-        return false;
-    }
-
-    return true;
-}
+    return true;  //7
+}  //1
 
 
 
@@ -257,6 +250,7 @@ if(formLogin){
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         validacoes,
+        validacaoLogin,
         visualizarSenha,
         showModal
     };
