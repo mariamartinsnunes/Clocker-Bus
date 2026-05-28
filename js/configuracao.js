@@ -23,30 +23,13 @@ if(temaSalvo === 'escuro'){
 
 
 function ativarModoClaro(){
-    document.documentElement.style.setProperty(
-        '--cor-fundo-pontual',
-        '#F1FEC6'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-fundo-geral',
-        '#B6D6CC'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-detalhes',
-        '#64B6AC'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-texto-icone',
-        '#34A0A4'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-texto-geral',
-        '#04191F'
-    );
+    document.documentElement.style.setProperty('--cor-fundo-pontual', '#F1FEC6');
+    document.documentElement.style.setProperty('--cor-fundo-geral', '#B6D6CC');
+    document.documentElement.style.setProperty('--cor-detalhes', '#64B6AC');
+    document.documentElement.style.setProperty('--cor-texto-icone', '#34A0A4');
+    document.documentElement.style.setProperty('--cor-texto-geral', '#04191F');
+    document.documentElement.style.setProperty('--cor-fundo-sidebar', '#B6D6CC'); 
+    document.documentElement.style.setProperty('--cor-texto-sidebar', '#04191F');
 
     localStorage.setItem('tema', 'claro');
 }
@@ -54,30 +37,15 @@ function ativarModoClaro(){
 
 
 function ativarModoEscuro(){
-    document.documentElement.style.setProperty(
-        '--cor-fundo-pontual',
-        '#a6ae8b'
-    );
+    document.documentElement.style.setProperty('--cor-fundo-geral', '#121212');    // Fundo total preto
+    document.documentElement.style.setProperty('--cor-fundo-pontual', '#1e1e1e');  // Modais cinza escuro
+    document.documentElement.style.setProperty('--cor-detalhes', '#2B5A53');       // Botões verde escuro
+    document.documentElement.style.setProperty('--cor-texto-icone', '#809c98');     // Ícones suaves
+    document.documentElement.style.setProperty('--cor-texto-geral', '#ffffff');     // Texto branco puro
 
-    document.documentElement.style.setProperty(
-        '--cor-fundo-geral',
-        '#7ba396'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-detalhes',
-        '#3b7a73'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-texto-icone',
-        '#20686b'
-    );
-
-    document.documentElement.style.setProperty(
-        '--cor-texto-geral',
-        '#04191F'
-    );
+    
+    document.documentElement.style.setProperty('--cor-fundo-sidebar', '#1e1e1e');  // Fundo do menu escuro
+    document.documentElement.style.setProperty('--cor-texto-sidebar', '#ffffff');  // Letras do menu brancas
 
     localStorage.setItem('tema', 'escuro');
 }

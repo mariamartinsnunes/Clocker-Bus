@@ -1,33 +1,105 @@
-.espaco{
+.espaco {
     margin-top: 30px;
 }
 
-.funcaoConfig{
+.funcaoConfig {
     margin-left: 20px;
 }
 
-.funcaoConfig p{
-    color: rgb(75, 74, 74);
+.funcaoConfig p {
+    color: var(--cor-texto-geral);
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
-.icones{
+.funcaoConfig i {
+    font-size: 35px;
+    cursor: pointer;
+    color: var(--cor-texto-icone);
+}
+
+.icones {
     display: flex;
     gap: 15px;
 }
 
-.funcaoConfig i{
-    font-size: 30px;
-}
-
-.funcaoConfig button{
-    border: 3px solid gray;
-    border-radius: 20px;
-    color: gray;
-    font-size: 15px;
+.funcaoConfig button {
+    border: 3px solid var(--cor-texto-icone);
+    border-radius: 12px;
+    color: var(--cor-texto-geral);
+    font-size: 20px;
+    font-weight: bold;
     background-color: transparent;
-    padding: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.botao{
-    background-color: gray;
+.funcaoConfig button:hover {
+    background-color: var(--cor-texto-icone);
+    color: var(--cor-fundo-pontual);
+}
+
+
+.botao {
+    background-color: var(--cor-detalhes) !important;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 0.2s ease;
+}
+
+.botao:hover {
+    opacity: 0.9;
+}
+
+
+p, h1, h2, h3, h4, h5, h6, span, label {
+    color: var(--cor-texto-geral);
+}
+
+
+#sidebarConta {
+    background-color: var(--cor-fundo-sidebar) !important;
+    transition: background-color 0.3s ease;
+}
+
+#sidebarConta h2,
+#sidebarConta h3,
+#sidebarConta p {
+    color: var(--cor-texto-sidebar) !important;
+    transition: color 0.3s ease;
+}
+
+#sidebarConta .menu-conta a {
+    background-color: var(--cor-detalhes) !important;
+    color: var(--cor-texto-sidebar) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sidebarConta .menu-conta a:hover {
+    opacity: 0.8;
+}
+
+#fecharSidebar {
+    color: var(--cor-texto-sidebar) !important;
+}
+
+
+.modal-content {
+    background-color: var(--cor-fundo-pontual) !important;
+    color: var(--cor-texto-geral) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body[style*="--cor-fundo-geral: #121212"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%) !important;
 }

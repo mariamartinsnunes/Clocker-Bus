@@ -165,16 +165,14 @@ function carregarRotas(rotasFiltradas = null) {
         if(rota.status.includes("Atrasado")) corstatus = "var(--cor-alerta)"; 
         if(rota.status.includes("Chegando")) corstatus = "green"; 
 
-        card.innerHTML = `
-            <img src="${rota.imagem || 'https://via.placeholder.com/100x70?text=Mapa'}" class="card-img" alt="Mapa da rota">
-            
+        card.innerHTML = `          
             <div class="card-conteudo">
                 <h3><i class="fa-solid fa-bus"></i><strong> ${rota.linha}</strong></h3>
 
                 <div class="card-info">
                     <div>
                         <p><i class="fa-solid fa-clock"></i> Previsão de saída: <b>${rota.saida}</b></p>
-                        <p><i class="fa-solid fa-tower-broadcast"></i> Previsão: <b style="color: ${corstatus};">${rota.status}</b></p>
+                        <p><i class="fa-solid fa-tower-broadcast"></i> Status: <b style="color: ${corstatus};">${rota.status}</b></p>
                     </div>
                     <div>
                         <p><i class="fa-solid fa-users"></i> Lotação: <b>${rota.lotacao}</b></p>

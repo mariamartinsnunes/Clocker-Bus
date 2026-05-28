@@ -1,66 +1,83 @@
-#container-historico{
+#container-historico {
     display: flex;
     flex-direction: row;
 }
 
-#container-historico section{
-    width: 60%;  /*antes era 50%*/
-    margin: 0 auto;  /*tirar isso depois*/
+#container-historico section {
+    width: 60%;
+    margin: 0 auto;
 }
 
-.subtitulo{
+.subtitulo {
     margin: 30px 30px 0 30px;
     padding: 10px 15px;
-
     font-family: 'Oswald', sans-serif;
-    background-color: #34A0A4;
+    background-color: var(--cor-texto-icone);
     border-radius: 10px;
 }
 
-.container-conteudo{
+.container-conteudo {
     margin: 10px 30px;
     padding: 5px;
-    background-color: #f1fec680;
+    background-color: var(--cor-fundo-pontual);
+    opacity: 0.9;
     border-radius: 10px;
+    transition: background-color 0.3s ease;
 }
 
-.container-conteudo .info-aviso{
+body[style*="#121212"] .container-conteudo {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.container-conteudo .info-aviso {
     padding: 10px;
     font-size: 18px;
+    color: var(--cor-texto-geral);
 }
 
-
-.card{
-    background-color: #F1FEC6;
-    border: 2px solid #F1FEC6;
+.card {
+    background-color: var(--cor-fundo-pontual);
+    border: 2px solid var(--cor-detalhes);
     border-radius: 20px;
-
     display: flex;
     flex-direction: row;
     gap: 20px;
     padding: 10px;
     margin: 20px 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
-.card-linha{
+body[style*="#121212"] .card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.card-linha {
     font-family: 'Oswald', sans-serif;
-    color: #04191F;
+    color: var(--cor-texto-geral);
     font-size: 16px;
     margin-top: 5px;
     width: 60%;
 }
 
-.opcoes{
+.opcoes {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
+    align-items: center;
     gap: 30px;
+    width: 40%;
 }
 
-.informacoes{
-    color: #A31300;
+.informacoes {
+    color: var(--cor-alerta);
+    cursor: pointer;
+    font-weight: 500;
 }
 
-.salvarLinha{
-    color: #236e70;
+.salvarLinha {
+    color: var(--cor-detalhes);
+    cursor: pointer;
+    font-weight: 500;
 }

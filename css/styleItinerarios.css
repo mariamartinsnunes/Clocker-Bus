@@ -1,115 +1,275 @@
-.item-modal{
+h3{
+    color: var(--cor-texto-geral);
+    text-align: center;
+}
+
+.espaco {
+    margin-top: 30px;
+}
+
+.funcaoConfig {
+    margin-left: 20px;
+}
+
+.funcaoConfig p {
+    color: var(--cor-texto-geral);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.funcaoConfig i {
+    font-size: 35px;
+    cursor: pointer;
+    color: var(--cor-texto-icone);
+}
+
+.icones {
+    display: flex;
+    gap: 15px;
+}
+
+.funcaoConfig button {
+    border: 3px solid var(--cor-texto-icone);
+    border-radius: 12px;
+    color: var(--cor-texto-geral);
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.funcaoConfig button:hover {
+    background-color: var(--cor-texto-icone);
+    color: var(--cor-fundo-pontual);
+}
+
+.botao {
+    background-color: var(--cor-detalhes) !important;
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: opacity 0.2s ease;
+}
+
+.botao:hover {
+    opacity: 0.9;
+}
+
+p, h1, h2, h3, h4, h5, h6, span, label {
+    color: var(--cor-texto-geral);
+}
+
+#sidebarConta {
+    background-color: var(--cor-fundo-sidebar) !important;
+    transition: background-color 0.3s ease;
+}
+
+#sidebarConta h2,
+#sidebarConta h3,
+#sidebarConta p {
+    color: var(--cor-texto-sidebar) !important;
+    transition: color 0.3s ease;
+}
+
+#sidebarConta .menu-conta a {
+    background-color: var(--cor-detalhes) !important;
+    color: var(--cor-texto-sidebar) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#sidebarConta .menu-conta a:hover {
+    opacity: 0.8;
+}
+
+#fecharSidebar {
+    color: var(--cor-texto-sidebar) !important;
+}
+
+.modal-content {
+    background-color: var(--cor-fundo-pontual) !important;
+    color: var(--cor-texto-geral) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body[style*="--cor-fundo-geral: #121212"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%) !important;
+}
+
+.campo input {
+    width: 100%;
+    height: 35px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(4, 25, 31, 0.2);
+    border-radius: 10px;
+    color: var(--cor-texto-geral);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.campo input::placeholder {
+    color: var(--cor-texto-geral);
+    opacity: 0.5;
+}
+
+.campo input:focus {
+    border-color: var(--cor-detalhes);
+    background-color: #ffffff;
+}
+
+.olho-senha {
+    position: absolute; 
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--cor-texto-geral);
+    opacity: 0.5;
+    z-index: 10;
+    transition: opacity 0.2s ease;
+}
+
+.olho-senha:hover {
+    opacity: 1;
+    color: var(--cor-detalhes);
+}
+
+.item-modal {
     width: 100%;
     margin: 30px 0;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     border-radius: 15px;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease;
 }
 
-.item-modal .info{
+.item-modal .info {
     padding-left: 8px;
 }
 
-.item-modal .trajeto{
+.item-modal .trajeto {
     font-family: 'Oswald', sans-serif;
     font-size: large;
-    color: #1c595c;
+    color: var(--cor-texto-icone);
 }
 
-.item-modal .select{
-    border: 1px solid #236e70;
+.item-modal .select {
+    border: 1px solid var(--cor-detalhes);
     border-radius: 15px;
     background-color: transparent;
-    color: #1c595c;
+    color: var(--cor-texto-geral);
     padding: 4px 8px;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.item-modal.selecionado{
-    background-color: #f1fec633;
-    border-left: 8px solid #1c595c;
+.item-modal.selecionado {
+    background-color: rgba(241, 254, 198, 0.15);
+    border-left: 8px solid var(--cor-detalhes);
 }
 
-.item-modal.selecionado .select{
-    background-color: #236e70;
-    color: #f1fec6;
+.item-modal.selecionado .select {
+    background-color: var(--cor-detalhes);
+    color: var(--cor-fundo-pontual);
 }
 
-
-
-#listaItinerarios{
+#listaItinerarios {
     width: 90%;
     margin: auto;
 }
 
-#listaItinerarios h5{
+#listaItinerarios h5 {
     margin-top: 15px;
-    color: #04191f9a;
+    color: var(--cor-texto-geral);
+    opacity: 0.6;
     font-family: 'Oswald', sans-serif;
 }
 
-
-.cardSalvo{
+.cardSalvo {
     margin-bottom: 30px;
     width: 100%;
-    background-color: #f1fec6b6;
+    background-color: var(--cor-fundo-pontual);
+    opacity: 0.95;
     border-radius: 15px;
     padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
 }
 
-.cardSalvo .enderecos{
+body[style*="#121212"] .cardSalvo {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.cardSalvo .enderecos {
     font-family: 'Oswald', sans-serif;
     font-size: large;
-    color: #1c595c;
+    color: var(--cor-texto-geral);
 }
 
-.cardSalvo .botoesI{
+.cardSalvo .botoesI {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 10px;
 }
 
-
-.buscarPontos{
-    background-color: #34A0A4;
+.buscarPontos, 
+.excluirItinerario {
     border: none;
     border-radius: 15px;
-
     font-size: 16px;
     color: white;
-    width: 80px;
-    height: 30px;
+    width: 95px;
+    height: 32px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.buscarPontos:hover{
-    background-color: #236e70;
+.buscarPontos {
+    background-color: var(--cor-texto-icone);
 }
 
-.excluirItinerario{
+.buscarPontos:hover {
+    background-color: var(--cor-detalhes);
+}
+
+.excluirItinerario {
     background-color: #f86653;
-    border: none;
-    border-radius: 15px;
-
-    font-size: 16px;
-    color: white;
-    width: 80px;
-    height: 30px;
 }
 
-.excluirItinerario:hover{
-    background-color: #A31300;
-    color: white;
+.excluirItinerario:hover {
+    background-color: var(--cor-alerta);
 }
 
+.buscarPontos:active, 
+.excluirItinerario:active {
+    transform: scale(0.95);
+}
 
-#pontosParada .modal-content{
+#pontosParada .modal-content {
     border-radius: 15px;
     font-size: 18px;
-    color: #04191f;
+    color: var(--cor-texto-geral);
 }
 
-
-
-.colunasTabelas{
+.colunasTabelas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -118,20 +278,19 @@
     width: 100%;
 }
 
-
-.coluna-turno{
+.coluna-turno {
     border: none;
     border-radius: 15px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 100%;
 }
 
-
-.titulo-turno{
+.titulo-turno {
     font-size: 1.5rem;
-    color: #04191f;
+    color: var(--cor-texto-geral);
     margin-bottom: 10px;
     text-align: center;
+    font-family: 'Oswald', sans-serif;
 }
