@@ -34,6 +34,67 @@
     </header>
 
 
+    <!-- Lauane: meu modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <p id="modal-mensagem"></p>
+            <button id="modal-fechar">Fechar</button>
+        </div>
+    </div>
+
+    <!-- BOTÃO FAQ -->
+    <button id="btnFaq" title="Dúvidas Frequentes">?</button>
+
+    <!-- MODAL FAQ -->
+    <div class="modal fade" id="modalFaq" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+            <div class="modal-header" style="border-bottom: 2px solid var(--cor-detalhes);">
+                <h5 class="modal-title" style="font-family:'Oswald',sans-serif; text-transform:uppercase; color:var(--cor-texto-icone);">
+                <i class="fa-solid fa-circle-question" style="margin-right:8px;"></i>Dúvidas Frequentes
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" style="padding: 10px 25px 20px;">
+
+                <details class="faq-item">
+                <summary>Como busco uma rota de ônibus?</summary>
+                <p>Na página inicial, digite seu destino no campo de busca e clique em <strong>Buscar</strong>. O sistema exibirá as rotas disponíveis que passam pelo local informado. Você também pode usar o mapa para visualizar as rotas geograficamente.</p>
+                </details>
+
+                <details class="faq-item">
+                <summary>Preciso me cadastrar para usar o sistema?</summary>
+                <p>A busca básica de rotas é livre. Porém, funcionalidades como <strong>Itinerários</strong> e <strong>Histórico</strong> exigem login. Para se cadastrar, clique em <em>Minha Conta</em> no menu superior e depois em <em>Cadastre-se ou faça seu login</em>.</p>
+                </details>
+
+                <details class="faq-item">
+                <summary>Como filtro rotas pela minha universidade?</summary>
+                <p>Clique no botão <strong>Filtrar</strong> ao lado do campo de busca. Selecione sua instituição de ensino na lista e clique em <strong>Salvar</strong>. As rotas serão filtradas de acordo com o destino da instituição escolhida.</p>
+                </details>
+
+                <details class="faq-item">
+                <summary>Como altero meu nome ou minha senha?</summary>
+                <p>Abra o menu <em>Minha Conta</em>, clique em <strong>Editar Perfil</strong> e preencha apenas os campos que deseja alterar — nome, senha atual e nova senha. Deixe em branco o que não quiser modificar e clique em <strong>Salvar</strong>.</p>
+                </details>
+
+                <details class="faq-item">
+                <summary>Para que serve o Histórico?</summary>
+                <p>O <strong>Histórico</strong> registra as rotas que você pesquisou ou utilizou. Ele facilita encontrar rapidamente uma rota que você já usou antes, sem precisar buscar novamente. O histórico fica salvo na sua conta.</p>
+                </details>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="botao botaoSalvar" data-bs-dismiss="modal" style="width:auto; padding: 0 20px;">Fechar</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <main class="container-rotas">
         <section class="topo-rotas">
             <h1><i class="fa-solid fa-route"></i>  Gerenciar Rotas</h1>
@@ -211,7 +272,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="botao botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="botao botaoSalvar" id="salvarPerfil" data-bs-dismiss="modal">Salvar</button>
+                    <button type="button" class="botao botaoSalvar" id="salvarPerfil">Salvar</button>
                 </div>
             </div>
 
@@ -254,31 +315,61 @@
         </div>
     </div>
 
+    
+    <div id="loadingLogout" class="loading-logout">
+        <div class="loading-box">
+            <p>Saindo da conta...</p>
+            <div class="barra">
+                <div class="progresso"></div>
+            </div>
+        </div>
+    </div>
+
+
 
     <script>
         window.onload = function() {
-
             var btn = document.getElementById("btnMinhaConta");
             var sidebar = document.getElementById("sidebarConta");
             var overlay = document.getElementById("overlay");
             var fechar = document.getElementById("fecharSidebar");
 
+            // Abrir Sidebar da Conta
             btn.onclick = function(e){
                 e.preventDefault();
                 sidebar.style.right = "0";
                 overlay.style.display = "block";
             }
 
+            // Fechar Sidebar da Conta
             fechar.onclick = function(){
                 sidebar.style.right = "-350px";
                 overlay.style.display = "none";
             }
-
             overlay.onclick = function(){
                 sidebar.style.right = "-350px";
                 overlay.style.display = "none";
             }
 
+            // Gatilho Manual para o Modal FAQ (Garante funcionamento)
+            document.getElementById('btnFaq').addEventListener('click', function() {
+                var modalFaqElement = document.getElementById('modalFaq');
+                var modalFaq = bootstrap.Modal.getOrCreateInstance(modalFaqElement);
+                modalFaq.show();
+            });
+
+            // Gatilho Manual para os Modals vindos da Sidebar da Conta
+            document.getElementById('editarPerfil').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modalPerfil = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEditarPerfil'));
+                modalPerfil.show();
+            });
+
+            document.getElementById('btnConfiguracoes').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modalConfig = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalConfig'));
+                modalConfig.show();
+            });
         }
     </script>
 

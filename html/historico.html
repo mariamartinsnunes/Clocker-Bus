@@ -19,9 +19,9 @@
     <link rel="stylesheet" href="../css/styleConfiguracao.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styleHistorico.css">
-    
 </head>
 <body>
+
     <header>
         <div class="logo">
             <i class="fa-solid fa-bus"></i>
@@ -35,24 +35,65 @@
         </nav>
     </header>
 
-    
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <p id="modal-mensagem"></p>
+            <button id="modal-fechar">Fechar</button>
+        </div>
+    </div>
+
+    <button id="btnFaq" title="Dúvidas Frequentes">?</button>
+
+    <div class="modal fade" id="modalFaq" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 2px solid var(--cor-detalhes);">
+                    <h5 class="modal-title" style="font-family:'Oswald',sans-serif; text-transform:uppercase; color:var(--cor-texto-icone);">
+                        <i class="fa-solid fa-circle-question" style="margin-right:8px;"></i>Dúvidas Frequentes
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body" style="padding: 10px 25px 20px;">
+                    <details class="faq-item">
+                        <summary>Como busco uma rota de ônibus?</summary>
+                        <p>Na página inicial, digite seu destino no campo de busca e clique em <strong>Buscar</strong>. O sistema exibirá as rotas disponíveis que passam pelo local informado. Você também pode usar o mapa para visualizar as rotas geograficamente.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Preciso me cadastrar para usar o sistema?</summary>
+                        <p>A busca básica de rotas é livre. Porém, functionalities como <strong>Itinerários</strong> e <strong>Histórico</strong> exigem login. Para se cadastrar, clique em <em>Minha Conta</em> no menu superior e depois em <em>Cadastre-se ou faça seu login</em>.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como filtro rotas pela minha universidade?</summary>
+                        <p>Clique no botão <strong>Filtrar</strong> ao lado do campo de busca. Selecione sua instituição de ensino na lista e clique em <strong>Salvar</strong>. As rotas serão filtradas de acordo com o destino da instituição escolhida.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como altero meu nome ou minha senha?</summary>
+                        <p>Abra o menu <em>Minha Conta</em>, clique em <strong>Editar Perfil</strong> e preencha apenas os campos que deseja alterar — nome, senha atual e nova senha. Deixe em branco o que não quiser modificar e clique em <strong>Salvar</strong>.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Para que serve o Histórico?</summary>
+                        <p>O <strong>Histórico</strong> registra as rotas que você pesquisou ou utilizou. Ele facilita encontrar rapidamente uma rota que você já usou antes, sem precisar buscar novamente. O histórico fica salvo na sua conta.</p>
+                    </details>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="botao botaoSalvar" data-bs-dismiss="modal" style="width:auto; padding: 0 20px;">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
         
     <main id="container-historico">
         <section>
             <h4 class="subtitulo">Linhas visualizadas recentemente</h4>
-
             <div class="container-conteudo" id="historico"></div>
         </section>
 
-        <!--
-        <section>
-            <h4 class="subtitulo">Linhas salvas</h4>
-
-            <div class="container-conteudo" id="favoritas"></div>
-        </section>
-        -->
-
-        
         <div class="modal fade" id="informacoesLinha" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -68,7 +109,6 @@
         </div>
     </main>
 
-
     <footer>
         <a href="#">Seja Parceiro e Investidor</a>
         <a href="#">Entre em Contato</a>
@@ -77,14 +117,8 @@
         <a href="#">Investidores e Parceiro</a>
     </footer>
     
-
-
-    <!--Minha Conta-->
-
-    <!-- OVERLAY -->
     <div id="overlay"></div>
 
-    <!-- SIDEBAR -->
     <div id="sidebarConta" class="sidebar-conta">
         <div class="sidebar-header">
             <h2>Minha Conta</h2>
@@ -96,28 +130,21 @@
                 <div class="foto-perfil">
                     <img id="exibirAvatar" class="imgAvatar" src="" alt="Avatar">
                 </div>
-
                 <h3 id="nomeUsuario"></h3>
                 <p id="emailUsuario"></p>
             </div>
 
             <ul class="menu-conta">
                 <li><a href="#" id="realizarCadastro">Cadastre-se ou faça seu login</a></li>
-
-                <li><a href="#" class="opcaoPerfil" id="editarPerfil" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar Perfil</a></li>
-                <li><a href="#" class="opcaoPerfil" id="btnConfiguracoes">Configurações</a></li>
+                <li><a href="#" class="opcaoPerfil" id="editarPerfil" data-bs-toggle="modal" data-bs-target="#modalEditarPerfil">Editar Perfil</a></li>
+                <li><a href="#" class="opcaoPerfil" id="btnConfiguracoes" data-bs-toggle="modal" data-bs-target="#modalConfiguracoes">Configurações</a></li>
                 <li><a href="#" class="opcaoPerfil" id="sairLogin">Sair</a></li>
             </ul>
         </div>
     </div>
 
-    
-
-    <!-- EDITAR PERFIL -->
-
-    <div class="modal fade modalPerfil" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modalPerfil" id="modalEditarPerfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -126,11 +153,9 @@
                 <div class="modal-body">
                     <div class="avatar">
                         <i class="fa-solid fa-chevron-left seta" id="esquerda"></i>
-
                         <div class="fotoPerfilModal">
                             <img id="editarAvatar" class="imgAvatar" src="" alt="Avatar">
                         </div>
-
                         <i class="fa-solid fa-chevron-right seta" id="direita"></i>
                     </div>
 
@@ -139,17 +164,14 @@
                         <p>Deixe em branco se não quiser alterar a informação</p>
 
                         <h5>Alterar nome</h5>
-
                         <div class="campo">
                             <label for="nomePerfil">Nome:</label> <br>
                             <input type="text" id="nomePerfil" placeholder="digite aqui" minlength="5" pattern="^[A-Za-zÀ-ÿ\s']+$"> <br><br>
                         </div>
 
                         <h5>Alterar senha</h5>
-
                         <div class="campo">
                             <label for="senhaAtual">Senha atual:</label> <br>
-
                             <div class="senha-container">
                                 <input type="password" id="senhaAtual" placeholder="digite aqui"> 
                                 <i class="fa-solid fa-eye olho-senha"></i>
@@ -158,7 +180,6 @@
 
                         <div class="campo">
                             <label for="senhaNova">Nova senha:</label> <br>
-
                             <div class="senha-container">
                                 <input type="password" id="senhaNova" placeholder="digite aqui" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$"> 
                                 <i class="fa-solid fa-eye olho-senha"></i>
@@ -169,17 +190,14 @@
 
                 <div class="modal-footer">
                     <button type="button" class="botao botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="botao botaoSalvar" id="salvarPerfil" data-bs-dismiss="modal">Salvar</button>
+                    <button type="button" class="botao botaoSalvar" id="salvarPerfil">Salvar</button>
                 </div>
             </div>
-
         </div>
     </div>
 
-
-    <div class="modal fade modalConfiguracao" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modalConfiguracao" id="modalConfiguracoes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-
             <div class="modal-content">
                 <div class="modal-header">
                     <h5>Configurações</h5>
@@ -189,7 +207,6 @@
                 <div class="modal-body">
                     <div class="funcaoConfig">
                         <p><b>Contraste:</b></p>
-
                         <div class="icones">
                             <i id="modoClaro" class="fa-solid fa-sun"></i>
                             <i id="modoEscuro" class="fa-solid fa-moon"></i>
@@ -198,7 +215,6 @@
 
                     <div class="funcaoConfig espaco">
                         <p><b>Tamanho da fonte:</b></p>
-                        
                         <button id="btnAumentarFonte"><b>A+</b></button>
                         <button id="btnDiminuirFonte"><b>A-</b></button>
                     </div>
@@ -208,14 +224,22 @@
                     <button type="button" class="botao" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
-
         </div>
     </div>
 
-                        
+
+    <div id="loadingLogout" class="loading-logout">
+        <div class="loading-box">
+            <p>Saindo da conta...</p>
+            <div class="barra">
+                <div class="progresso"></div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         window.onload = function() {
-
             var btn = document.getElementById("btnMinhaConta");
             var sidebar = document.getElementById("sidebarConta");
             var overlay = document.getElementById("overlay");
@@ -227,16 +251,18 @@
                 overlay.style.display = "block";
             }
 
-            fechar.onclick = function(){
+            function fecharPainel() {
                 sidebar.style.right = "-350px";
                 overlay.style.display = "none";
             }
 
-            overlay.onclick = function(){
-                sidebar.style.right = "-350px";
-                overlay.style.display = "none";
-            }
+            fechar.onclick = fecharPainel;
+            overlay.onclick = fecharPainel;
 
+            // Evento do botão FAQ
+            document.getElementById('btnFaq').addEventListener('click', function() {
+                new bootstrap.Modal(document.getElementById('modalFaq')).show();
+            });
         }
     </script>
 

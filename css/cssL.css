@@ -275,3 +275,46 @@ footer {
 #modal-fechar:hover {
     background: #64B6AC;
 }
+
+#btnFaq:hover {
+    background-color: #236e70;
+    transform: scale(1.1);
+}
+
+/* PERGUNTAS ACCORDION */
+.faq-item {
+    border-bottom: 1px solid var(--cor-detalhes);
+    padding: 14px 0;
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-item summary {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: var(--cor-texto-icone);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.faq-item summary::after {
+    content: '+';
+    font-size: 20px;
+    color: var(--cor-detalhes);
+    transition: 0.2s;
+}
+
+.faq-item[open] summary::after { 
+    content: '−'; 
+}
+
+.faq-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--cor-texto-geral);
+    line-height: 1.6;
+    padding-left: 4px;
+}

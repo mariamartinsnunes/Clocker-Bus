@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const novoHorario = document.querySelector('#horario').value;
 
             if (novaLinha.length < 3) {
-                alert("Digite um nome de linha válido.");
+                showModal("Digite um nome de linha válido.");
                 return;
             }
 
@@ -167,7 +167,7 @@ window.alterarStatusRota = function(id, novoStatus) {
         renderizarRotas(); 
 
         if (novoStatus === 'Em operação') {
-            alert("Viagem iniciada! Transmitindo seu GPS para os passageiros...");
+            showModal("Viagem iniciada! Transmitindo seu GPS para os passageiros...");
             
             if (!socketMotorista) {
                 socketMotorista = io('https://projeto-clocker-bus.onrender.com'); 
@@ -186,14 +186,14 @@ window.alterarStatusRota = function(id, novoStatus) {
         
                 }, function(erro) {
                     console.log("Erro no GPS do Motorista", erro);
-                    alert("Por favor, ative a localização do seu dispositivo para iniciar a rota.");
+                    showModal("Por favor, ative a localização do seu dispositivo para iniciar a rota.");
                 }, { enableHighAccuracy: true });
             }
 
         } else if (novoStatus === 'Pausada') {
             if (idRastreamentoMotorista) {
                 navigator.geolocation.clearWatch(idRastreamentoMotorista);
-                alert("Viagem pausada. Transmissão de GPS interrompida.");
+                showModal("Viagem pausada. Transmissão de GPS interrompida.");
             }
         }
     }
