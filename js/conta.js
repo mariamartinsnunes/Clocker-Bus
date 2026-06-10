@@ -407,17 +407,6 @@ if(salvar){
 
 
 //saindo da conta
-/* const sair = document.querySelector('#sairLogin');
-
-if(sair){
-    sair.addEventListener('click', () => {
-        localStorage.removeItem("usuarioLogado");
-        showModal('Saindo...');
-        window.location.replace('../index.html');
-    }); 
-}*/ 
-
-// SAINDO DA CONTA
 document.addEventListener('click', function(e) {
 
     // Procura se o clique foi no botão de sair (ou dentro dele)

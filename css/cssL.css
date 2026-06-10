@@ -1,3 +1,9 @@
+:root {
+    --cor-texto-icone: #34A0A4;
+    --cor-texto-geral: #04191F;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -281,40 +287,56 @@ footer {
     transform: scale(1.1);
 }
 
-/* PERGUNTAS ACCORDION */
-.faq-item {
-    border-bottom: 1px solid var(--cor-detalhes);
-    padding: 14px 0;
-}
-.faq-item:last-child { border-bottom: none; }
 
-.faq-item summary {
-    font-family: 'Oswald', sans-serif;
-    font-size: 16px;
-    color: var(--cor-texto-icone);
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
+
+/* LOADING */
+
+.loading-logout {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
     align-items: center;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-.faq-item summary::after {
-    content: '+';
-    font-size: 20px;
-    color: var(--cor-detalhes);
-    transition: 0.2s;
+    z-index: 99999;
 }
 
-.faq-item[open] summary::after { 
-    content: '−'; 
+.loading-box {
+    background: white;
+    width: 320px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.faq-item p {
-    margin-top: 10px;
-    font-size: 14px;
+.loading-box p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
     color: var(--cor-texto-geral);
-    line-height: 1.6;
-    padding-left: 4px;
+}
+
+.barra {
+    width: 100%;
+    height: 12px;
+    background: #ddd;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progresso {
+    width: 0%;
+    height: 100%;
+    background: var(--cor-texto-icone);
+    border-radius: 999px;
+}
+
+.progresso.animar {
+    animation: carregar 4s linear forwards;
+}
+
+@keyframes carregar {
+    from { width: 0%; }
+    to { width: 100%; }
 }

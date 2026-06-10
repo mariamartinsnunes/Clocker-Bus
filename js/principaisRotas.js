@@ -291,7 +291,7 @@ function exibeModalFaculdade(nomeDaUni) {
 function modalFiltros(){
     const modalFiltro = document.querySelector('#modalFiltrar');
     if(modalFiltro && typeof bootstrap !== 'undefined'){
-        const modalF = new bootstrap.Modal(modalFiltro);
+        const modalF = bootstrap.Modal.getOrCreateInstance(modalFiltro);
         modalF.show();
     }
 }

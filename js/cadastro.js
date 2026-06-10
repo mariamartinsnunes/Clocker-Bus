@@ -22,6 +22,28 @@ function showModal(mensagem, callback) {
 
 
 
+function barraEntrando (texto, callback){
+    const loading = document.getElementById('loading');
+    const progresso = document.querySelector('.progresso');
+    const mensagem = loading.querySelector('.entrando');
+
+    if(!loading || !progresso){
+        console.log('Elementos de animação não encontrados no HTML.');
+        return;
+    }
+
+    mensagem.textContent = texto;
+    loading.style.display = 'flex';
+
+    progresso.classList.remove('animar');
+    void progresso.offsetWidth;
+    progresso.classList.add('animar');
+
+    setTimeout(callback, 4000);
+}
+
+
+
 //para a visualização da senha
 function visualizarSenha(){
     const iconesOlho = document.querySelectorAll('.olho-senha');
@@ -45,6 +67,9 @@ function visualizarSenha(){
 }
 
 visualizarSenha();
+
+
+//---------------------------------------------------------------------
 
 
 //cadastro 
@@ -152,7 +177,7 @@ if(formulario){
                     email.value = '';
                     senha.value = '';
 
-                    showModal('Cadastro realizado com sucesso!', function () {
+                    barraEntrando('Cadastro realizado com sucesso!', function () {
                         if(usuarioSelecionado == 'passageiro'){
                             window.location.replace("../index.html");
                         } else {
@@ -224,7 +249,7 @@ if(formLogin){
             if(cadastroExiste){
                 localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
                 
-                showModal('Entrando...', function () {
+                barraEntrando('Entrando...', function () {
                     if (tipoUsuario == 'passageiro') {
                         window.location.replace("../index.html");
                     } else {
